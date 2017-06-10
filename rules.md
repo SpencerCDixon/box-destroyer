@@ -28,3 +28,11 @@ Tower Traits
 * attack rate
 * direction
 * hit chance
+
+
+TODO:
+* [ ] make a single constants files
+* [x] win condition
+* [ ] gold for buying towers
+* [ ] shop side board
+* [ ] dev utility screen (metrics)

@@ -49,6 +49,9 @@ export class Board {
   attackTile(row, col, dmg) {
     this.tileAt(row, col).enemies.forEach(enemy => {
       enemy.health = enemy.health - dmg
+      if (enemy.health <= 0) {
+        this.tileAt(row, col).killEnemy(enemy);
+      }
     });
   }
 
@@ -109,5 +112,14 @@ export class Board {
     towers.forEach(towerTile => {
       towerTile.attack(this);
     });
+  }
+
+  enemyCount() {
+    return this.tiles.reduce((acc, row) => {
+      const rowNum = row.reduce((acc, tile) => {
+        return acc + tile.enemies.length
+      }, 0);
+      return acc + rowNum
+    }, 0)
   }
 }

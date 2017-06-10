@@ -3,12 +3,8 @@ import {
   OffLimits, Path, Placeable,
   SimpleTower,
 } from '../tiles';
-import { SurroundTower } from '../towers/surround.js';
 import { Tower } from '../towers/tower';
-
-const towerTypes = {
-  'simple': SurroundTower,
-};
+import { towerTypes } from '../constants.js';
 
 export class Tile {
   constructor({ 
@@ -75,5 +71,9 @@ export class Tile {
     if (this.isTower()) {
       this.tower.attack(board);
     }
+  }
+
+  killEnemy(enemy) {
+    this.enemies = this.enemies.filter(e => e !== enemy);
   }
 }

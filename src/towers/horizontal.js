@@ -1,6 +1,7 @@
 import { Tower } from './tower';
+import { towers } from '../constants.js';
 
-export class SurroundTower extends Tower {
+export class HorizontalTower extends Tower {
   constructor(tile) {
     super()
     this.tile = tile;
@@ -10,7 +11,7 @@ export class SurroundTower extends Tower {
     this.range().forEach(coord => {
       const [x, y] = coord;
       if (board.tileAt(x, y).isEnemy()) {
-        board.attackTile(x, y, 2);
+        board.attackTile(x, y, towers.vertical.dmg);
       }
     });
   }
@@ -18,8 +19,6 @@ export class SurroundTower extends Tower {
   range() {
     const [row, col] = this.tile.loc;
     return [
-      [row - 1, col],
-      [row + 1, col],
       [row, col - 1],
       [row, col + 1],
     ];

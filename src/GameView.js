@@ -1,10 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import { Game } from './models/game.js';
 import { levelOne } from './models/levels';
+import { shopTowerTypes } from './constants.js';
 
 const Overlay = ({children}) => 
-  <div className="overlay">
-    <h1 className="paused flex-center">{children}</h1>
+  <div className="overlay flex-center">
+    <h1 className="paused">{children}</h1>
   </div>
 
 const CurrentTurn = ({children}) => 
@@ -18,16 +19,17 @@ class GameView extends Component {
     this.state = { 
       game: undefined,
       gameState: 'running',
-      selectedTower: 'simple',
+      selectedTower: 'cross',
     }
     this.togglePause = () => this.setState({
       gameState: this.state.gameState === 'paused' ? 'running' : 'paused'
     });
     this.handleOver = () => this.setState({gameState: 'over'});
+    this.handleWin = () => this.setState({gameState: 'win'});
   }
 
   componentDidMount() {
-    this.game = new Game(levelOne, this.handleOver);
+    this.game = new Game(levelOne, this.handleOver, this.handleWin);
     this.loop = setInterval(() => {
       if (this.state.gameState === 'running') {
         this.setState({game: this.game.nextTick()});
@@ -41,10 +43,15 @@ class GameView extends Component {
 
   get isPaused() { return this.state.gameState === 'paused' }
   get isOver() { return this.state.gameState === 'over' }
+  get isWon() { return this.state.gameState === 'win' }
 
   addTower = (tile) => {
     // if I can place tower, put here
     tile.placeTower(this.state.selectedTower);
+  }
+
+  selectTower = (e) => {
+    this.setState({selectedTower: e.target.value})
   }
 
   render() {
@@ -55,7 +62,12 @@ class GameView extends Component {
         </button>
 
         <div>
-          Selected tower type: {this.state.selectedTower}
+          Selected tower type: 
+          <select onChange={this.selectTower}>
+            {shopTowerTypes.map(type => (
+              <option value={type}>{type}</option>
+            ))}
+          </select>
         </div>
 
         {this.state.game && (
@@ -74,6 +86,7 @@ class GameView extends Component {
 
             {this.isPaused && <Overlay>Paused</Overlay>}
             {this.isOver && <Overlay>Game Over</Overlay>}
+            {this.isWon && <Overlay>You Win!</Overlay>}
           </div>
         )}
       </div>

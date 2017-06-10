@@ -1,14 +1,18 @@
 import { Board } from './board';
-import { has } from 'lodash';
+import { toNumber, has } from 'lodash';
 
 export class Game {
-  constructor(level, onLose) {
+  constructor(level, onLose, onWin) {
     const { mapBlueprint, enemyBlueprint } = level;
     this.tick = 0;
     this.board = new Board(mapBlueprint, onLose)
 
+    this.onWin = onWin;
     // TODO: make a more robust spawner implementation
     this.spawners = enemyBlueprint;
+    this.lastSpawnTick = Math.max(
+      ...Object.keys(this.spawners).map(toNumber)
+    );
   }
 
   nextTick() {
@@ -20,6 +24,7 @@ export class Game {
   update() {
     this.updateEnemies();
     this.updateTowers();
+    this.checkForWin();
   }
 
   updateEnemies() {
@@ -35,5 +40,12 @@ export class Game {
 
   spawn(enemyType) {
     this.board.spawn(enemyType);
+  }
+
+  checkForWin() {
+    const enemyCount = this.board.enemyCount();
+    if (this.tick > this.lastSpawnTick && enemyCount === 0) {
+      this.onWin();
+    }
   }
 }
