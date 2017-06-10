@@ -3,7 +3,7 @@ import { towers } from '../constants.js';
 
 export class CrossHairTower extends Tower {
   constructor(tile) {
-    super()
+    super();
     this.tile = tile;
   }
 

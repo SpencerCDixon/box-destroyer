@@ -1,5 +1,5 @@
 import { Tile } from './tile';
-import { Enemy } from './enemy';
+import { enemyTypes } from '../constants.js';
 
 const PLACEABLE_TILE = "P";
 const UNPLACEABLE_TILE = "X";
@@ -72,7 +72,9 @@ export class Board {
   }
 
   spawn(enemyType) {
-    this.spawnTile().enemies.push(new Enemy(enemyType));
+    this.spawnTile().enemies.push(
+      new enemyTypes[enemyType]()
+    );
   }
 
   // start at the last path and move enemies to the next path

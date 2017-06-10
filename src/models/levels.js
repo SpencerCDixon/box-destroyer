@@ -12,12 +12,8 @@ export const levelOne = {
     ['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X'],
   ],
   enemyBlueprint: {
-    1: 'basic enemy',
-    2: 'basic enemy',
-    5: 'basic enemy',
-    8: 'basic enemy',
-    11: 'basic enemy',
-    13: 'basic enemy',
-    14: 'basic enemy',
+    1: 'basic',
+    2: 'advanced',
+    5: 'superior',
   }
 };
