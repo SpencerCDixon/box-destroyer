@@ -5,6 +5,6 @@ const sx = {
   background: 'green',
 };
 
-export function Placeable() {
-  return <Tile style={sx} />
+export function Placeable(props) {
+  return <Tile onClick={props.click} style={sx} />
 }

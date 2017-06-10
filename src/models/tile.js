@@ -1,4 +1,8 @@
-import { BasicSpawn, BasicEnemy, OffLimits, Path, Placeable } from '../tiles';
+import { 
+  BasicSpawn, BasicEnemy, 
+  OffLimits, Path, Placeable,
+  SimpleTower,
+} from '../tiles';
 
 export class Tile {
   constructor({ 
@@ -29,7 +33,7 @@ export class Tile {
   }
 
   isTower() {
-    return typeof this.tower !== undefined;
+    return typeof this.tower === 'string';
   }
 
   isEnemy() {
@@ -40,20 +44,18 @@ export class Tile {
     return this.spawnTile;
   }
 
-  render() {
+  render(cb) {
     // TODO: instead, pass enemies is a prop to the path tile
-    if (this.isEnemy()) {
-      return BasicEnemy();
+    if (this.isTower()) {
+      return SimpleTower();
     } else if (this.isSpawn()) {
       return BasicSpawn();
     } else if (this.isPath()) {
-      return Path();
+      return Path({enemies: this.enemies});
     } else if (this.isPlaceable()) {
-      return Placeable();
+      return Placeable({click: cb});
     } else if (this.isOffLimits()) {
       return OffLimits();
-    } else if (this.isTower()) {
-      return 'tower';
     }
   }
 }

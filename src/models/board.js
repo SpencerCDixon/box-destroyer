@@ -5,9 +5,10 @@ const UNPLACEABLE_TILE = "X";
 const PATH_REG = /\d/
 
 export class Board {
-  constructor(blueprint) {
+  constructor(blueprint, onLose) {
     // holds all tile info
     this.tiles = [];
+    this.onLose = onLose;
 
     // path cache
     this.pathCache = {};
@@ -70,7 +71,8 @@ export class Board {
 
       const nextPathNum = pathTile + 1
       if (nextPathNum > greatest && currentTile.isEnemy()) {
-        throw new Error('GAME OVER');
+        // game over
+        this.onLose();
       } else if (nextPathNum > greatest) {
         // do nothing
       } else {

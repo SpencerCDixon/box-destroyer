@@ -5,6 +5,10 @@ const sx = {
   background: 'yellow',
 };
 
-export function Path() {
-  return <Tile style={sx} />
+export function Path({enemies}) {
+  return (
+    <Tile style={sx}>
+      {enemies.map(e => 'X')}
+    </Tile>
+  )
 }
