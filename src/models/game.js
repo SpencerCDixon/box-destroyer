@@ -19,6 +19,7 @@ export class Game {
 
   update() {
     this.updateEnemies();
+    this.updateTowers();
   }
 
   updateEnemies() {
@@ -26,6 +27,10 @@ export class Game {
       this.spawn(this.spawners[this.tick.toString()]);
     }
     this.board.moveEnemies();
+  }
+
+  updateTowers() {
+    this.board.attack();
   }
 
   spawn(enemyType) {

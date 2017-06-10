@@ -3,17 +3,25 @@ import {
   OffLimits, Path, Placeable,
   SimpleTower,
 } from '../tiles';
+import { SurroundTower } from '../towers/surround.js';
+import { Tower } from '../towers/tower';
+
+const towerTypes = {
+  'simple': SurroundTower,
+};
 
 export class Tile {
   constructor({ 
     pathNum = 0,  
     placeable = false, 
     spawnTile = false,
+    loc,
   }) {
     // configurable
     this.placeable = placeable;
     this.pathNum = pathNum; // 0 is not a path
     this.spawnTile = spawnTile;
+    this.loc = loc;
 
     // internal
     this.enemies = [];
@@ -33,7 +41,7 @@ export class Tile {
   }
 
   isTower() {
-    return typeof this.tower === 'string';
+    return this.tower instanceof Tower;
   }
 
   isEnemy() {
@@ -45,7 +53,6 @@ export class Tile {
   }
 
   render(cb) {
-    // TODO: instead, pass enemies is a prop to the path tile
     if (this.isTower()) {
       return SimpleTower();
     } else if (this.isSpawn()) {
@@ -56,6 +63,17 @@ export class Tile {
       return Placeable({click: cb});
     } else if (this.isOffLimits()) {
       return OffLimits();
+    }
+  }
+
+  placeTower(towerType) {
+    this.placeable = false;
+    this.tower = new towerTypes[towerType](this);
+  }
+
+  attack(board) {
+    if (this.isTower()) {
+      this.tower.attack(board);
     }
   }
 }

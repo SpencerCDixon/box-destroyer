@@ -42,9 +42,9 @@ class GameView extends Component {
   get isPaused() { return this.state.gameState === 'paused' }
   get isOver() { return this.state.gameState === 'over' }
 
-  handleClick = (tile) => {
-    console.log({tile});
-    tile.tower = this.state.selectedTower;
+  addTower = (tile) => {
+    // if I can place tower, put here
+    tile.placeTower(this.state.selectedTower);
   }
 
   render() {
@@ -66,7 +66,7 @@ class GameView extends Component {
               return (
                 <div className="row" key={`row-${i}`}>
                   {row.map((tile, i) => {
-                    return tile.render(this.handleClick.bind(this, tile))
+                    return tile.render(this.addTower.bind(this, tile))
                   })}
                 </div>
               )

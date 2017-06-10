@@ -21,4 +21,10 @@ spawn.
 
 
 Level Blueprints
-[
+
+
+Tower Traits
+* dmg rate
+* attack rate
+* direction
+* hit chance
