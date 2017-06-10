@@ -1,36 +1,35 @@
-import { Tile } from './tile';
-
-const PLACEABLE_TILE = "P";
-const UNPLACEABLE_TILE = "X";
-const PATH_REG = /\d/
-
-export function buildLevel(level) {
-  return level.map(row => {
-    return row.map(tile => {
-      if (PLACEABLE_TILE === tile) {
-        return new Tile({placeable: true});
-      } else if (UNPLACEABLE_TILE === tile) {
-        return new Tile({placeable: false});
-      } else if (PATH_REG.test(tile)) {
-        return new Tile({pathNum: tile});
-      } else {
-        throw new Error("Couldn't create tile with: " + tile);
-      }
-    })
-  });
-}
+import { Board } from './board';
+import { has } from 'lodash';
 
 export class Game {
-  constructor(mapBlueprint) {
+  constructor({mapBlueprint, enemyBlueprint}) {
     this.tick = 0;
-    this.board = buildLevel(mapBlueprint)
+    this.board = new Board(mapBlueprint)
+
+    // TODO: make a more robust spawner implementation
+    this.spawners = enemyBlueprint;
   }
 
   nextTick() {
-    this.tick = this.tick + 1;
+    console.log('begin tick');
+    this.tick += 1;
+    this.update();
+    console.log('end tick');
     return this;
   }
 
+  update() {
+    this.updateEnemies();
+  }
+
+  updateEnemies() {
+    if (has(this.spawners, this.tick.toString())) {
+      this.spawn(this.spawners[this.tick.toString()]);
+    }
+    this.board.moveEnemies();
+  }
+
   spawn(enemyType) {
+    this.board.spawn(enemyType);
   }
 }

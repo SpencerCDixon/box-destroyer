@@ -7,6 +7,11 @@ const PausedOverlay = () =>
     <h1 className="paused flex-center">Paused</h1>
   </div>
 
+const CurrentTurn = ({children}) => 
+  <div className="turn">
+    {children}
+  </div>
+
 class GameView extends Component {
   constructor(props) {
     super(props);
@@ -18,7 +23,7 @@ class GameView extends Component {
   }
 
   componentDidMount() {
-    this.game = new Game(levelOne.map);
+    this.game = new Game(levelOne);
     this.loop = setInterval(() => {
       if (!this.state.paused) {
         this.setState({game: this.game.nextTick()});
@@ -26,7 +31,7 @@ class GameView extends Component {
     }, 1000);
   }
 
-  componentWillUnmoun() {
+  componentWillUnmount() {
     clearInterval(this.loop)
   }
 
@@ -39,11 +44,13 @@ class GameView extends Component {
 
         {this.state.game && (
           <div className="game">
-            {this.state.game.board.map(row => {
+            <CurrentTurn>{this.state.game.tick}</CurrentTurn>
+
+            {this.state.game.board.tiles.map((row, i) => {
               return (
-                <div className="row">
-                  {row.map(tile => {
-                    return <div className={"tile " + tile.render()} />
+                <div className="row" key={`row-${i}`}>
+                  {row.map((tile, i) => {
+                    return tile.render()
                   })}
                 </div>
               )
