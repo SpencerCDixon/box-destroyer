@@ -31,7 +31,7 @@ class GameView extends Component {
 
   componentDidMount() {
     this.game = new Game(
-      levelThree, 
+      levelTwo, 
       this.handleOver, 
       this.handleWin,
       this.changeGold,

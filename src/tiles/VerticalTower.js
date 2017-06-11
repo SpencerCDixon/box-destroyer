@@ -6,6 +6,7 @@ const sx = {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
+  color: 'white',
 };
 
 export function VerticalTower() {

@@ -5,6 +5,7 @@ import {
   CrossTower,
   VerticalTower,
   HorizontalTower,
+  SurroundTower,
 } from '../tiles';
 import { Tower } from '../towers/tower';
 import { towerTypes } from '../constants.js';
@@ -75,6 +76,8 @@ export class Tile {
         return VerticalTower();
       case 'horizontal':
         return HorizontalTower();
+      case 'surround':
+        return SurroundTower();
       default:
         return SimpleTower();
     }

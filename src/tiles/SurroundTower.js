@@ -2,13 +2,13 @@ import React from 'react';
 import { Tile } from './Tile';
 
 const sx = {
-  background: 'goldenrod',
+  background: 'crimson',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
   color: 'white',
 };
 
-export function CrossTower() {
-  return <Tile style={sx}>+</Tile>
+export function SurroundTower() {
+  return <Tile style={sx}>*</Tile>
 }

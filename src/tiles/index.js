@@ -7,4 +7,5 @@ export { SimpleTower } from './SimpleTower.js';
 export { CrossTower } from './CrossTower.js';
 export { VerticalTower } from './VerticalTower.js';
 export { HorizontalTower } from './HorizontalTower.js';
+export { SurroundTower } from './SurroundTower.js';
 
