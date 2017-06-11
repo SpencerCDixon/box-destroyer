@@ -1,12 +1,13 @@
 import { Tile } from './tile';
 import { enemyTypes } from '../constants.js';
+import { toNumber } from 'lodash';
 
 const PLACEABLE_TILE = "P";
 const UNPLACEABLE_TILE = "X";
 const PATH_REG = /\d/
 
 export class Board {
-  constructor(blueprint, onLose) {
+  constructor(blueprint, onLose, changeGold) {
     // holds all tile info
     this.tiles = [];
     this.onLose = onLose;
@@ -15,18 +16,26 @@ export class Board {
     this.pathCache = {};
 
     // buildLevel
-    this.buildLevel(blueprint);
+    this.buildLevel(blueprint, changeGold);
   }
 
-  buildLevel(blueprint) {
+  buildLevel(blueprint, changeGold) {
     this.tiles = blueprint.map((row, rIdx) => {
       return row.map((tile, tIdx) => {
         const loc = [rIdx, tIdx];
 
         if (PLACEABLE_TILE === tile) {
-          return new Tile({placeable: true, loc,});
+          return new Tile({
+            placeable: true, 
+            loc,
+            changeGold,
+          });
         } else if (UNPLACEABLE_TILE === tile) {
-          return new Tile({placeable: false, loc,});
+          return new Tile({
+            placeable: false, 
+            loc,
+            changeGold,
+          });
         } else if (PATH_REG.test(tile)) {
           // save coordinates for path
           this.pathCache[tile] = loc;
@@ -34,6 +43,7 @@ export class Board {
             pathNum: tile, 
             spawnTile: tile === 1,
             loc,
+            changeGold,
           });
         } else {
           throw new Error("Couldn't create tile with: " + tile);
@@ -71,21 +81,21 @@ export class Board {
     return this.tileAt(row, column);
   }
 
-  spawn(enemyType) {
+  spawn(enemyType, tick) {
     this.spawnTile().enemies.push(
-      new enemyTypes[enemyType]()
+      new enemyTypes[enemyType](tick)
     );
   }
 
   // start at the last path and move enemies to the next path
   moveEnemies() {
     const pathKeys = Object.keys(this.pathCache);
-    const sorted = pathKeys.map(n => parseInt(n, 10)).reverse();
+    const sorted = pathKeys.map(toNumber).reverse();
 
     sorted.forEach(pathTile => {
       const greatest = Math.max(...sorted);
       const [row, col] = this.pathCache[pathTile.toString()]
-      const currentTile = this.tiles[row][col];
+      const currentTile = this.tileAt(row, col);
 
       const nextPathNum = pathTile + 1
       if (nextPathNum > greatest && currentTile.isEnemy()) {

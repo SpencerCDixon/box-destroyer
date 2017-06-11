@@ -15,12 +15,15 @@ export const shopTowerTypes = Object.keys(towerTypes);
 export const towers = {
   cross: {
     dmg: 30,
+    price: 100,
   },
   vertical: {
     dmg: 40,
+    price: 100,
   },
   horizontal: {
     dmg: 40,
+    price: 100,
   }
 };
 
@@ -31,13 +34,17 @@ export const towers = {
 
 export const enemies = {
   basic: {
-    health: 100,
+    health: 90,
+    value: 10,
+    tickMult: 5,
   },
   advanced: {
     health: 200,
+    value: 20,
   },
   superior: {
     health: 300,
+    value: 30,
   },
 }
 

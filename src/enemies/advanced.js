@@ -5,5 +5,6 @@ export class AdvancedEnemy extends Enemy {
   constructor() {
     super();
     this.health = enemies.advanced.health;
+    this.value = enemies.advanced.value;
   }
 }

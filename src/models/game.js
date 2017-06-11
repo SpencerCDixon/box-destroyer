@@ -2,10 +2,11 @@ import { Board } from './board';
 import { toNumber, has } from 'lodash';
 
 export class Game {
-  constructor(level, onLose, onWin) {
-    const { mapBlueprint, enemyBlueprint } = level;
+  constructor(level, onLose, onWin, changeGold) {
+    const { mapBlueprint, enemyBlueprint, goldStart } = level;
     this.tick = 0;
-    this.board = new Board(mapBlueprint, onLose)
+    this.board = new Board(mapBlueprint, onLose, changeGold)
+    this.gold = goldStart;
 
     this.onWin = onWin;
     // TODO: make a more robust spawner implementation
@@ -17,19 +18,19 @@ export class Game {
 
   nextTick() {
     this.tick += 1;
-    this.update();
+    this.update(this.tick);
     return this;
   }
 
-  update() {
-    this.updateEnemies();
+  update(tick) {
+    this.updateEnemies(tick);
     this.updateTowers();
     this.checkForWin();
   }
 
-  updateEnemies() {
+  updateEnemies(tick) {
     if (has(this.spawners, this.tick.toString())) {
-      this.spawn(this.spawners[this.tick.toString()]);
+      this.spawn(this.spawners[this.tick.toString()], tick);
     }
     this.board.moveEnemies();
   }
@@ -38,8 +39,8 @@ export class Game {
     this.board.attack();
   }
 
-  spawn(enemyType) {
-    this.board.spawn(enemyType);
+  spawn(enemyType, tick) {
+    this.board.spawn(enemyType, tick);
   }
 
   checkForWin() {

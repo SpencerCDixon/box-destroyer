@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Game } from './models/game.js';
 import { levelOne } from './models/levels';
-import { shopTowerTypes } from './constants.js';
+import { towers, shopTowerTypes } from './constants.js';
 
 const Overlay = ({children}) => 
   <div className="overlay flex-center">
@@ -20,6 +20,7 @@ class GameView extends Component {
       game: undefined,
       gameState: 'running',
       selectedTower: 'cross',
+      gold: 0,
     }
     this.togglePause = () => this.setState({
       gameState: this.state.gameState === 'paused' ? 'running' : 'paused'
@@ -29,7 +30,15 @@ class GameView extends Component {
   }
 
   componentDidMount() {
-    this.game = new Game(levelOne, this.handleOver, this.handleWin);
+    this.game = new Game(
+      levelOne, 
+      this.handleOver, 
+      this.handleWin,
+      this.changeGold,
+    );
+
+    this.setState({gold: this.game.gold});
+    
     this.loop = setInterval(() => {
       if (this.state.gameState === 'running') {
         this.setState({game: this.game.nextTick()});
@@ -46,12 +55,22 @@ class GameView extends Component {
   get isWon() { return this.state.gameState === 'win' }
 
   addTower = (tile) => {
+    const towerPrice = towers[this.state.selectedTower].price;
+
     // if I can place tower, put here
-    tile.placeTower(this.state.selectedTower);
+    if (this.state.gold >= towerPrice) {
+      tile.placeTower(this.state.selectedTower);
+      this.changeGold(-towerPrice);
+    } 
   }
 
   selectTower = (e) => {
     this.setState({selectedTower: e.target.value})
+  }
+
+  // can be pos or neg
+  changeGold = (num) => {
+    this.setState({gold: this.state.gold + num});
   }
 
   render() {
@@ -69,6 +88,8 @@ class GameView extends Component {
             ))}
           </select>
         </div>
+
+        <div>Gold: {this.state.gold}</div>
 
         {this.state.game && (
           <div className="game">

@@ -12,12 +12,14 @@ export class Tile {
     placeable = false, 
     spawnTile = false,
     loc,
+    changeGold,
   }) {
     // configurable
     this.placeable = placeable;
     this.pathNum = pathNum; // 0 is not a path
     this.spawnTile = spawnTile;
     this.loc = loc;
+    this.changeGold = changeGold;
 
     // internal
     this.enemies = [];
@@ -63,8 +65,12 @@ export class Tile {
   }
 
   placeTower(towerType) {
+    // if (this.placeable) {
     this.placeable = false;
     this.tower = new towerTypes[towerType](this);
+    // } else {
+      // alert('cant put tower here');
+    // }
   }
 
   attack(board) {
@@ -74,6 +80,7 @@ export class Tile {
   }
 
   killEnemy(enemy) {
+    this.changeGold(enemy.value);
     this.enemies = this.enemies.filter(e => e !== enemy);
   }
 }
