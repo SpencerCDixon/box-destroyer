@@ -2,6 +2,9 @@ import {
   BasicSpawn, BasicEnemy, 
   OffLimits, Path, Placeable,
   SimpleTower,
+  CrossTower,
+  VerticalTower,
+  HorizontalTower,
 } from '../tiles';
 import { Tower } from '../towers/tower';
 import { towerTypes } from '../constants.js';
@@ -52,7 +55,7 @@ export class Tile {
 
   render(cb) {
     if (this.isTower()) {
-      return SimpleTower();
+      return this.renderTower();
     } else if (this.isSpawn()) {
       return BasicSpawn();
     } else if (this.isPath()) {
@@ -64,13 +67,22 @@ export class Tile {
     }
   }
 
+  renderTower() {
+    switch (this.tower.type) {
+      case 'cross':
+        return CrossTower();
+      case 'vertical':
+        return VerticalTower();
+      case 'horizontal':
+        return HorizontalTower();
+      default:
+        return SimpleTower();
+    }
+  }
+
   placeTower(towerType) {
-    // if (this.placeable) {
     this.placeable = false;
-    this.tower = new towerTypes[towerType](this);
-    // } else {
-      // alert('cant put tower here');
-    // }
+    this.tower = new towerTypes[towerType](this, towerType);
   }
 
   attack(board) {

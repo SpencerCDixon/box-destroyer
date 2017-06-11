@@ -4,4 +4,7 @@ export { Placeable } from './Placeable.js';
 export { BasicEnemy } from './BasicEnemy.js';
 export { BasicSpawn } from './BasicSpawn.js';
 export { SimpleTower } from './SimpleTower.js';
+export { CrossTower } from './CrossTower.js';
+export { VerticalTower } from './VerticalTower.js';
+export { HorizontalTower } from './HorizontalTower.js';
 

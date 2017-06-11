@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { Game } from './models/game.js';
-import { levelOne } from './models/levels';
+import { levelOne, levelTwo } from './models/levels';
 import { towers, shopTowerTypes } from './constants.js';
 
 const Overlay = ({children}) => 
@@ -31,7 +31,7 @@ class GameView extends Component {
 
   componentDidMount() {
     this.game = new Game(
-      levelOne, 
+      levelTwo, 
       this.handleOver, 
       this.handleWin,
       this.changeGold,

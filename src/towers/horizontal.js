@@ -2,9 +2,10 @@ import { Tower } from './tower';
 import { towers } from '../constants.js';
 
 export class HorizontalTower extends Tower {
-  constructor(tile) {
+  constructor(tile, type) {
     super()
     this.tile = tile;
+    this.type = type;
   }
 
   attack(board) {
