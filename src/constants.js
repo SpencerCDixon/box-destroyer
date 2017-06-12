@@ -38,7 +38,7 @@ export const towers = {
   },
   column: {
     dmg: 40,
-    price: 100,
+    price: 200,
   }
 };
 
