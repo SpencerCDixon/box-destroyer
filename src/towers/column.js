@@ -1,8 +1,9 @@
 import { Tower } from './tower';
 import { towers } from '../constants.js';
-import { HorizontalTower as HorizontalTowerTile} from '../tiles/HorizontalTower.js';
+import { ColumnTower as ColumnTowerTile } from '../tiles/ColumnTower.js';
+import { range } from 'lodash';
 
-export class HorizontalTower extends Tower {
+export class ColumnTower extends Tower {
   constructor(tile, type) {
     super()
     this.tile = tile;
@@ -13,20 +14,18 @@ export class HorizontalTower extends Tower {
     this.range().forEach(coord => {
       const [x, y] = coord;
       if (board.tileAt(x, y).isEnemy()) {
-        board.attackTile(x, y, towers.horizontal.dmg);
+        board.attackTile(x, y, towers.column.dmg);
       }
     });
   }
 
   range() {
     const [row, col] = this.tile.loc;
-    return [
-      [row, col - 1],
-      [row, col + 1],
-    ];
+    const wholeRow = range(9);
+    return wholeRow.map(newRow => [newRow, col]);
   }
 
   render() {
-    return HorizontalTowerTile();
+    return ColumnTowerTile();
   }
 }

@@ -201,5 +201,6 @@ export const levelFour = {
     'horizontal',
     'surround',
     'array',
+    'column',
   ],
 };

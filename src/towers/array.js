@@ -14,7 +14,7 @@ export class ArrayTower extends Tower {
     this.range().forEach(coord => {
       const [x, y] = coord;
       if (board.tileAt(x, y).isEnemy()) {
-        board.attackTile(x, y, towers.vertical.dmg);
+        board.attackTile(x, y, towers.array.dmg);
       }
     });
   }

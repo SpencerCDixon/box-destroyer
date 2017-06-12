@@ -1,4 +1,4 @@
-import { CrossHairTower, VerticalTower, HorizontalTower, SurroundTower, ArrayTower } from './towers';
+import { CrossHairTower, VerticalTower, HorizontalTower, SurroundTower, ArrayTower, ColumnTower } from './towers';
 import { BasicEnemy, AdvancedEnemy, SuperiorEnemy } from './enemies';
 
 // -------
@@ -10,6 +10,7 @@ export const towerTypes = {
   horizontal: HorizontalTower,
   surround: SurroundTower,
   array: ArrayTower,
+  column: ColumnTower,
 }
 
 export const shopTowerTypes = Object.keys(towerTypes);
@@ -35,6 +36,10 @@ export const towers = {
     dmg: 40,
     price: 200,
   },
+  column: {
+    dmg: 40,
+    price: 100,
+  }
 };
 
 // -------
