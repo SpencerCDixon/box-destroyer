@@ -2,6 +2,7 @@ import { Tower } from './tower';
 import { towers } from '../constants.js';
 import { ArrayTower as ArrayTowerTile } from '../tiles/ArrayTower.js';
 import { range } from 'lodash';
+import { inRange } from './util.js';
 
 export class ArrayTower extends Tower {
   constructor(tile, type) {
@@ -22,7 +23,9 @@ export class ArrayTower extends Tower {
   range() {
     const [row, col] = this.tile.loc;
     const wholeRow = range(9);
-    return wholeRow.map(newCol => [row, newCol]);
+    return wholeRow.
+      map(newCol => [row, newCol])
+      .filter(inRange);
   }
 
   render() {

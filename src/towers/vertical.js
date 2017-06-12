@@ -1,6 +1,7 @@
 import { Tower } from './tower';
 import { towers } from '../constants.js';
 import { VerticalTower as VerticalTowerTile} from '../tiles/VerticalTower.js';
+import { inRange } from './util.js';
 
 export class VerticalTower extends Tower {
   constructor(tile, type) {
@@ -19,11 +20,14 @@ export class VerticalTower extends Tower {
   }
 
   range() {
+    if (this.range) return this.range;
+
     const [row, col] = this.tile.loc;
-    return [
+    this.range = [
       [row - 1, col],
       [row + 1, col],
-    ];
+    ].filter(inRange);
+    return this.range;
   }
 
   render() {

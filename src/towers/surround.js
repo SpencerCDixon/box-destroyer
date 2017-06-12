@@ -1,6 +1,7 @@
 import { Tower } from './tower';
 import { towers } from '../constants.js';
 import { SurroundTower as SurroundTowerTile } from '../tiles/SurroundTower.js';
+import { inRange } from './util.js';
 
 export class SurroundTower extends Tower {
   constructor(tile, type) {
@@ -19,8 +20,10 @@ export class SurroundTower extends Tower {
   }
 
   range() {
+    if (this.range) return this.range;
+
     const [row, col] = this.tile.loc;
-    return [
+    this.range = [
       [row - 1, col],
       [row - 1, col + 1],
       [row - 1, col - 1],
@@ -29,7 +32,8 @@ export class SurroundTower extends Tower {
       [row + 1, col - 1],
       [row, col - 1],
       [row, col + 1],
-    ];
+    ].filter(inRange);
+    return this.range;
   }
 
   render() {

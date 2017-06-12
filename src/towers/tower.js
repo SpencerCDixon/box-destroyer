@@ -6,4 +6,8 @@ export class Tower {
   render() {
     throw new Error('must implement a render');
   }
+
+  range() {
+    throw new Error('must implement a range it can hit');
+  }
 }

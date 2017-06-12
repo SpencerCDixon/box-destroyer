@@ -1,12 +1,7 @@
 import { Tower } from './tower';
 import { towers } from '../constants.js';
 import { CrossTower as CrossHairTowerTile} from '../tiles/CrossTower.js';
-import { range } from 'lodash';
-
-function inRange([x, y]) {
-  const grid = range(9);
-  return grid.includes(x) && grid.includes(y);
-}
+import { inRange } from './util.js';
 
 export class CrossHairTower extends Tower {
   constructor(tile, type) {
