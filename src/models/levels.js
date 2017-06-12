@@ -34,6 +34,11 @@ export const levelOne = {
     40: 'basic',
   },
   goldStart: 200,
+  allowedTowers: [
+    'cross',
+    'vertical',
+    'horizontal',
+  ],
 };
 
 export const levelTwo = {
@@ -78,6 +83,11 @@ export const levelTwo = {
 
   },
   goldStart: 270,
+  allowedTowers: [
+    'cross',
+    'vertical',
+    'horizontal',
+  ],
 };
 
 export const levelThree = {
@@ -122,4 +132,73 @@ export const levelThree = {
     89: 'basic',
   },
   goldStart: 200,
+  allowedTowers: [
+    'cross',
+    'vertical',
+    'horizontal',
+  ],
+};
+
+export const levelFour = {
+  mapBlueprint: [
+    ['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X'],
+    ['X', 'X', 'X', 'X', 'X', 'X', 'X', 1, 'X', 'X'],
+    ['X', 'X', 11, 10, 9, 'P', 3, 2, 'X', 'X'],
+    ['X', 'X', 12, 'P', 8, 'P', 4, 'P', 'X', 'X'],
+    ['X', 'X', 13, 14, 7, 6, 5, 'P', 'X', 'X'],
+    ['X', 'X', 16, 15, 'X', 'X', 'P', 'P', 'X', 'X'],
+    ['X', 'X', 17, 'X', 'P', 22, 23, 24, 'X', 'X'],
+    ['X', 'X', 18, 19, 20, 21, 'P', 25, 'X', 'X'],
+    ['X', 'X', 'X', 'X', 'X', 'X', 'X', 26, 'X', 'X'],
+    ['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X'],
+  ],
+  enemyBlueprint: {
+    4: ['basic', 'basic'],
+    5: 'basic',
+    6: 'basic',
+    7: 'basic',
+    8: 'basic',
+    9: 'basic',
+    10: 'basic',
+    11: 'basic',
+    12: 'basic',
+    18: 'basic',
+    20: 'basic',
+    21: 'basic',
+    22: 'basic',
+    23: 'basic',
+    24: 'basic',
+    25: 'basic',
+    26: 'basic',
+    27: 'basic',
+    29: 'basic',
+    32: 'basic',
+    35: 'basic',
+    40: 'basic',
+    50: 'basic',
+    51: 'basic',
+    52: 'basic',
+    54: 'basic',
+    56: 'basic',
+    61: 'basic',
+    66: 'basic',
+    71: 'basic',
+    76: 'basic',
+    81: 'basic',
+    86: 'basic',
+    100: 'basic',
+    110: 'basic',
+    120: 'basic',
+    130: 'basic',
+    140: 'basic',
+    150: 'basic',
+    165: 'basic',
+  },
+  goldStart: 190,
+  allowedTowers: [
+    'cross',
+    'vertical',
+    'horizontal',
+    'surround',
+  ],
 };

@@ -3,7 +3,7 @@ import { toNumber, has } from 'lodash';
 
 export class Game {
   constructor(level, onLose, onWin, changeGold) {
-    const { mapBlueprint, enemyBlueprint, goldStart } = level;
+    const { mapBlueprint, enemyBlueprint, goldStart, allowedTowers } = level;
     this.tick = 0;
     this.board = new Board(mapBlueprint, onLose, changeGold)
     this.gold = goldStart;
@@ -14,6 +14,7 @@ export class Game {
     this.lastSpawnTick = Math.max(
       ...Object.keys(this.spawners).map(toNumber)
     );
+    this.allowedTowers = allowedTowers;
   }
 
   nextTick() {
@@ -30,7 +31,13 @@ export class Game {
 
   updateEnemies(tick) {
     if (has(this.spawners, this.tick.toString())) {
-      this.spawn(this.spawners[this.tick.toString()], tick);
+      if (Array.isArray(this.spawners[this.tick.toString()])) {
+        this.spawners[this.tick.toString()].forEach(et => {
+          this.spawn(et, tick);
+        });
+      } else {
+        this.spawn(this.spawners[this.tick.toString()], tick);
+      }
     }
     this.board.moveEnemies();
   }

@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { Game } from './models/game.js';
-import { levelOne, levelTwo, levelThree } from './models/levels';
+import { levelOne, levelTwo, levelThree, levelFour } from './models/levels';
 import { towers, shopTowerTypes } from './constants.js';
 
 const Overlay = ({children}) => 
@@ -31,7 +31,7 @@ class GameView extends Component {
 
   componentDidMount() {
     this.game = new Game(
-      levelTwo, 
+      levelFour, 
       this.handleOver, 
       this.handleWin,
       this.changeGold,
@@ -83,7 +83,7 @@ class GameView extends Component {
         <div>
           Selected tower type: 
           <select onChange={this.selectTower}>
-            {shopTowerTypes.map(type => (
+            {this.state.game && this.state.game.allowedTowers.map(type => (
               <option value={type}>{type}</option>
             ))}
           </select>

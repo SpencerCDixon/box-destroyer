@@ -8,7 +8,7 @@ const sx = {
 export function Path({enemies}) {
   return (
     <Tile style={sx}>
-      {enemies.map(e => `X (${e.health})`)}
+      {enemies.map(e => `(${e.health})`)}
     </Tile>
   )
 }
