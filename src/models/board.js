@@ -106,6 +106,7 @@ export class Board {
       } else {
         const [nextRow, nextCol] = this.pathCache[nextPathNum.toString()]
         const nextTile = this.tileAt(nextRow, nextCol);
+
         nextTile.enemies = currentTile.enemies;
         currentTile.enemies = [];
       }

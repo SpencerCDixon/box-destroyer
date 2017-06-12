@@ -1,6 +1,12 @@
 import { Tower } from './tower';
 import { towers } from '../constants.js';
 import { CrossTower as CrossHairTowerTile} from '../tiles/CrossTower.js';
+import { range } from 'lodash';
+
+function inRange([x, y]) {
+  const grid = range(9);
+  return grid.includes(x) && grid.includes(y);
+}
 
 export class CrossHairTower extends Tower {
   constructor(tile, type) {
@@ -12,12 +18,14 @@ export class CrossHairTower extends Tower {
   attack(board) {
     this.range().forEach(coord => {
       const [x, y] = coord;
+      console.log(x, y);
       if (board.tileAt(x, y).isEnemy()) {
         board.attackTile(x, y, towers.cross.dmg);
       }
     });
   }
 
+  // TODO: check only path tiles
   range() {
     const [row, col] = this.tile.loc;
     return [
@@ -25,7 +33,7 @@ export class CrossHairTower extends Tower {
       [row + 1, col],
       [row, col - 1],
       [row, col + 1],
-    ];
+    ].filter(inRange)
   }
 
   render() {
