@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import cn from 'classnames';
 import { Game } from './models/game.js';
-import { levelOne, levelTwo, levelThree, levelFour, levelFive } from './models/levels';
+import { levelOne, levelTwo, levelThree, levelFour, levelFive, levelSix } from './models/levels';
 import { towerTypes, towers, shopTowerTypes } from './constants.js';
 import { isUndefined } from 'lodash';
 
@@ -33,7 +33,7 @@ class GameView extends Component {
 
   componentDidMount() {
     this.game = new Game(
-      levelFive, 
+      levelSix, 
       this.handleOver, 
       this.handleWin,
       this.changeGold,
