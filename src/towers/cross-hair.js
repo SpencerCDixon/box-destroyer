@@ -1,5 +1,6 @@
 import { Tower } from './tower';
 import { towers } from '../constants.js';
+import { CrossTower as CrossHairTowerTile} from '../tiles/CrossTower.js';
 
 export class CrossHairTower extends Tower {
   constructor(tile, type) {
@@ -25,5 +26,9 @@ export class CrossHairTower extends Tower {
       [row, col - 1],
       [row, col + 1],
     ];
+  }
+
+  render() {
+    return CrossHairTowerTile();
   }
 }

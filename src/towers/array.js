@@ -1,8 +1,9 @@
 import { Tower } from './tower';
 import { towers } from '../constants.js';
-import { HorizontalTower as HorizontalTowerTile} from '../tiles/HorizontalTower.js';
+import { ArrayTower as ArrayTowerTile } from '../tiles/ArrayTower.js';
+import { range } from 'lodash';
 
-export class HorizontalTower extends Tower {
+export class ArrayTower extends Tower {
   constructor(tile, type) {
     super()
     this.tile = tile;
@@ -20,13 +21,11 @@ export class HorizontalTower extends Tower {
 
   range() {
     const [row, col] = this.tile.loc;
-    return [
-      [row, col - 1],
-      [row, col + 1],
-    ];
+    const wholeRow = range(9);
+    return wholeRow.map(newCol => [row, newCol]);
   }
 
   render() {
-    return HorizontalTowerTile();
+    return ArrayTowerTile();
   }
 }

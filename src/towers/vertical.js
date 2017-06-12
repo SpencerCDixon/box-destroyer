@@ -1,5 +1,6 @@
 import { Tower } from './tower';
 import { towers } from '../constants.js';
+import { VerticalTower as VerticalTowerTile} from '../tiles/VerticalTower.js';
 
 export class VerticalTower extends Tower {
   constructor(tile, type) {
@@ -23,5 +24,9 @@ export class VerticalTower extends Tower {
       [row - 1, col],
       [row + 1, col],
     ];
+  }
+
+  render() {
+    return VerticalTowerTile();
   }
 }

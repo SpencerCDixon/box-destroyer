@@ -56,7 +56,7 @@ export class Tile {
 
   render(cb) {
     if (this.isTower()) {
-      return this.renderTower();
+      return this.tower.render();
     } else if (this.isSpawn()) {
       return BasicSpawn();
     } else if (this.isPath()) {
@@ -65,21 +65,6 @@ export class Tile {
       return Placeable({click: cb});
     } else if (this.isOffLimits()) {
       return OffLimits();
-    }
-  }
-
-  renderTower() {
-    switch (this.tower.type) {
-      case 'cross':
-        return CrossTower();
-      case 'vertical':
-        return VerticalTower();
-      case 'horizontal':
-        return HorizontalTower();
-      case 'surround':
-        return SurroundTower();
-      default:
-        return SimpleTower();
     }
   }
 

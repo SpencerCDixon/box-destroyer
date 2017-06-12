@@ -1,5 +1,6 @@
 import { Tower } from './tower';
 import { towers } from '../constants.js';
+import { SurroundTower as SurroundTowerTile } from '../tiles/SurroundTower.js';
 
 export class SurroundTower extends Tower {
   constructor(tile, type) {
@@ -29,6 +30,10 @@ export class SurroundTower extends Tower {
       [row, col - 1],
       [row, col + 1],
     ];
+  }
+
+  render() {
+    return SurroundTowerTile();
   }
 }
 
