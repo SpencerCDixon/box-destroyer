@@ -2,7 +2,7 @@ import React from 'react';
 import { Tile } from './Tile';
 
 const sx = {
-  background: 'crimson',
+  background: '#FDB827',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',

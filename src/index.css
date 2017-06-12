@@ -2,6 +2,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  background: slategray;
 }
 
 .game {
@@ -15,10 +16,6 @@ body {
 .row {
   width: 500px;
   display: flex;
-}
-
-.tower {
-  background: pink;
 }
 
 .overlay {
@@ -48,3 +45,54 @@ body {
   right: 20px;
   color: white;
 }
+
+.tower-selector {
+  display: flex;
+  justify-content: space-between;
+}
+
+.tower {
+  cursor: pointer;
+  padding: 2px;
+}
+
+.selected {
+  padding: 0;
+  border: 2px solid black;
+}
+
+.btn {
+  position: absolute;
+  top: 20;
+  left: 20;
+
+  cursor: pointer;
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+.money-container {
+  width: 100%;
+  text-align: center;
+  color: white;
+}
+
+.money-container h3 {
+  margin: 0;
+}
+
+.tower-desc {
+  margin: 15px 0;
+  width: 250px;
+}
+
+.tower-desc h3 {
+  margin: 10px 0;
+}
+

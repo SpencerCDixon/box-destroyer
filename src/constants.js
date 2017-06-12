@@ -19,26 +19,32 @@ export const towers = {
   cross: {
     dmg: 30,
     price: 100,
+    rangeDesc: "Does damage up, down, left, and right",
   },
   vertical: {
     dmg: 40,
     price: 100,
+    rangeDesc: "Does damage up and down.",
   },
   horizontal: {
     dmg: 40,
     price: 100,
+    rangeDesc: "Does damage right and left.",
   },
   surround: {
     dmg: 30,
     price: 200,
+    rangeDesc: "Does damage to every surrounding tile",
   },
   array: {
     dmg: 40,
     price: 200,
+    rangeDesc: "Does damage to every enemy in the row",
   },
   column: {
     dmg: 40,
     price: 200,
+    rangeDesc: "Does damage to every enemy in the column",
   }
 };
 

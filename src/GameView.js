@@ -1,7 +1,9 @@
 import React, { Component, PropTypes } from 'react';
+import cn from 'classnames';
 import { Game } from './models/game.js';
 import { levelOne, levelTwo, levelThree, levelFour } from './models/levels';
-import { towers, shopTowerTypes } from './constants.js';
+import { towerTypes, towers, shopTowerTypes } from './constants.js';
+import { isUndefined } from 'lodash';
 
 const Overlay = ({children}) => 
   <div className="overlay flex-center">
@@ -19,7 +21,7 @@ class GameView extends Component {
     this.state = { 
       game: undefined,
       gameState: 'running',
-      selectedTower: 'cross',
+      selectedTower: shopTowerTypes[0],
       gold: 0,
     }
     this.togglePause = () => this.setState({
@@ -31,7 +33,7 @@ class GameView extends Component {
 
   componentDidMount() {
     this.game = new Game(
-      levelFour, 
+      levelThree, 
       this.handleOver, 
       this.handleWin,
       this.changeGold,
@@ -64,8 +66,8 @@ class GameView extends Component {
     } 
   }
 
-  selectTower = (e) => {
-    this.setState({selectedTower: e.target.value})
+  selectTower = (type) => {
+    this.setState({selectedTower: type})
   }
 
   // can be pos or neg
@@ -76,20 +78,47 @@ class GameView extends Component {
   render() {
     return (
       <div>
-        <button style={{position: 'absolute', top: 20, left: 20}} onClick={this.togglePause}>
+        <button className="btn" style={{position: 'absolute', top: 20, left: 20}} onClick={this.togglePause}>
           {this.state.paused ? 'Unpause' : 'Pause'}
         </button>
 
-        <div>
-          Selected tower type: 
-          <select onChange={this.selectTower}>
-            {this.state.game && this.state.game.allowedTowers.map(type => (
-              <option value={type}>{type}</option>
-            ))}
-          </select>
+        <div className="tower-selector">
+          {this.state.game && this.state.game.allowedTowers.map(type => {
+            const tower = new towerTypes[type]();
+
+            return (
+              <div>
+                <div 
+                  className={cn({
+                    tower: true,
+                    selected: this.state.selectedTower === type,
+                  })} 
+                  onClick={this.selectTower.bind(this, type)}
+                >
+                  {tower.render()}
+                </div>
+                <p style={{textAlign: 'center', color: 'white'}}>${towers[type].price}</p>
+              </div>
+            );
+          })}
         </div>
 
-        <div>Gold: {this.state.gold}</div>
+        <div className="money-container">
+          <h3>Gold: $  {this.state.gold}</h3>
+        </div>
+
+        {this.state.selectedTower && (
+          <div className="tower-desc" style={{position: 'absolute', top: 100, left: 20}}>
+            <header>
+              {new towerTypes[this.state.selectedTower]().render()}
+            </header>
+
+            <h3>Name: {this.state.selectedTower}</h3>
+            <h3>Price: {towers[this.state.selectedTower].price}</h3>
+            <h3>Range: </h3>
+            <p>{towers[this.state.selectedTower].rangeDesc}</p>
+          </div>
+        )}
 
         {this.state.game && (
           <div className="game">
