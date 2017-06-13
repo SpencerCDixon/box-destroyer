@@ -13,7 +13,6 @@ export class CrossHairTower extends Tower {
   attack(board) {
     this.range().forEach(coord => {
       const [x, y] = coord;
-      console.log(x, y);
       if (board.tileAt(x, y).isEnemy()) {
         board.attackTile(x, y, towers.cross.dmg);
       }

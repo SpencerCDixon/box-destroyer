@@ -20,10 +20,9 @@ export class SurroundTower extends Tower {
   }
 
   range() {
-    if (this.range) return this.range;
 
     const [row, col] = this.tile.loc;
-    this.range = [
+    return [
       [row - 1, col],
       [row - 1, col + 1],
       [row - 1, col - 1],
@@ -33,7 +32,6 @@ export class SurroundTower extends Tower {
       [row, col - 1],
       [row, col + 1],
     ].filter(inRange);
-    return this.range;
   }
 
   render() {

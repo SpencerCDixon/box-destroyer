@@ -20,14 +20,11 @@ export class VerticalTower extends Tower {
   }
 
   range() {
-    if (this.range) return this.range;
-
     const [row, col] = this.tile.loc;
-    this.range = [
+    return [
       [row - 1, col],
       [row + 1, col],
     ].filter(inRange);
-    return this.range;
   }
 
   render() {

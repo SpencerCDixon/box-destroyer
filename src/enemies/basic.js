@@ -7,5 +7,6 @@ export class BasicEnemy extends Enemy {
     this.health = enemies.basic.health + enemies.basic.tickMult * tick;
     this.totalHealth = enemies.basic.health + enemies.basic.tickMult * tick;
     this.value = this.health / 10;
+    this.type = 'basic';
   }
 }
