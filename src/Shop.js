@@ -50,7 +50,7 @@ export default class Shop extends Component {
           return (
             <TowerContainer selected={selectedTower === type}>
               {tower.render()}
-              <Price>$ {towers[type].price}</Price>
+              <Price>💰 {towers[type].price}</Price>
 
               <Button onClick={onSelect.bind(this, type)}>
                 Select

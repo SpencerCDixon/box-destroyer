@@ -9,7 +9,7 @@ const Wrapper = styled.div`
 
 const Level = styled.div`
   width: 30%;
-  background: ${props => props.complete ? 'black' : 'gray'};
+  background: ${props => props.complete ? 'black' : '#222831'};
   color: white;
   display: flex;
   align-items: center;
