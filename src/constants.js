@@ -1,6 +1,14 @@
 import { CrossHairTower, VerticalTower, HorizontalTower, SurroundTower, ArrayTower, ColumnTower } from './towers';
 import { BasicEnemy, AdvancedEnemy, SuperiorEnemy } from './enemies';
 
+// All possible states a level can be in
+export const gameStates = {
+  win: 'win',
+  lost: 'lost',
+  paused: 'paused',
+  running: 'running',
+}
+
 // -------
 // Towers
 // -------

@@ -56,10 +56,6 @@ class GameView extends Component {
     clearInterval(this.loop)
   }
 
-  get isPaused() { return this.state.gameState === 'paused' }
-  get isOver() { return this.state.gameState === 'over' }
-  get isWon() { return this.state.gameState === 'win' }
-
   addTower = (tile) => {
     const towerPrice = towers[this.state.selectedTower].price;
 

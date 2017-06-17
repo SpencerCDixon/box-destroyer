@@ -1,5 +1,5 @@
 import { Tile } from './tile';
-import { enemyTypes } from '../constants.js';
+import { gameStates, enemyTypes } from '../constants.js';
 import { toNumber } from 'lodash';
 
 const PLACEABLE_TILE = "P";
@@ -7,10 +7,11 @@ const UNPLACEABLE_TILE = "X";
 const PATH_REG = /\d/
 
 export class Board {
-  constructor(blueprint, onLose, changeGold) {
+  constructor(game, blueprint, onLose, changeGold) {
     // holds all tile info
     this.tiles = [];
     this.onLose = onLose;
+    this.game = game;
 
     // path cache
     this.pathCache = {};
@@ -28,13 +29,13 @@ export class Board {
           return new Tile({
             placeable: true, 
             loc,
-            changeGold,
+            game: this.game,
           });
         } else if (UNPLACEABLE_TILE === tile) {
           return new Tile({
             placeable: false, 
             loc,
-            changeGold,
+            game: this.game,
           });
         } else if (PATH_REG.test(tile)) {
           // save coordinates for path to simplify enemy movement
@@ -43,7 +44,7 @@ export class Board {
             pathNum: tile, 
             spawnTile: tile === 1,
             loc,
-            changeGold,
+            game: this.game,
           });
         } else {
           throw new Error("Couldn't create tile with: " + tile);
@@ -100,7 +101,7 @@ export class Board {
       const nextPathNum = pathTile + 1
       if (nextPathNum > greatest && currentTile.isEnemy()) {
         // game over
-        this.onLose();
+        this.onLose()
       } else if (nextPathNum > greatest) {
         // do nothing
       } else {

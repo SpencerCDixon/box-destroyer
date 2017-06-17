@@ -8,7 +8,7 @@ import {
   SurroundTower,
 } from '../tiles';
 import { Tower } from '../towers/tower';
-import { towerTypes } from '../constants.js';
+import { towers, towerTypes } from '../constants.js';
 
 export class Tile {
   constructor({ 
@@ -16,14 +16,14 @@ export class Tile {
     placeable = false, 
     spawnTile = false,
     loc,
-    changeGold,
+    game,
   }) {
     // configurable
     this.placeable = placeable;
     this.pathNum = pathNum; // 0 is not a path
     this.spawnTile = spawnTile;
     this.loc = loc;
-    this.changeGold = changeGold;
+    this.game = game;
 
     // internal
     this.enemies = [];
@@ -69,8 +69,13 @@ export class Tile {
   }
 
   placeTower(towerType) {
-    this.placeable = false;
-    this.tower = new towerTypes[towerType](this, towerType);
+    const towerPrice = towers[towerType].price;
+
+    if (this.game.gold >= towerPrice) {
+      this.placeable = false;
+      this.tower = new towerTypes[towerType](this, towerType);
+      this.game.changeGold(-towerPrice);
+    }
   }
 
   attack(board) {
@@ -80,7 +85,7 @@ export class Tile {
   }
 
   killEnemy(enemy) {
-    this.changeGold(enemy.value);
+    this.game.changeGold(enemy.value);
     this.enemies = this.enemies.filter(e => e !== enemy);
   }
 }

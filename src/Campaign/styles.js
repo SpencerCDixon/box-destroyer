@@ -22,6 +22,8 @@ export const PlayingField = styled.section`
   width: 100%;
   height: 80vh;
   background: #EEEEEE;
+  display: flex;
+  flex-direction: column
 `
 
 export const FlexColumn = styled.div`

@@ -13,7 +13,6 @@ export default class Shop extends Component {
     allowedTowers: PropTypes.array.isRequired,
     selectedTower: PropTypes.string.isRequired,
     onSelect: PropTypes.func.isRequired,
-    gold: PropTypes.number.isRequired,
   }
 
   render() {
@@ -21,7 +20,6 @@ export default class Shop extends Component {
       allowedTowers,
       selectedTower,
       onSelect,
-      gold,
     } = this.props;
 
     return (
@@ -42,9 +40,6 @@ export default class Shop extends Component {
             </div>
           )
         })}
-        <div>
-          Gold count: {gold}
-        </div>
       </div>
     );
   }
