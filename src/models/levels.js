@@ -39,6 +39,7 @@ export const levelOne = {
     'vertical',
     'horizontal',
   ],
+  interval: 500,
 };
 
 export const levelTwo = {

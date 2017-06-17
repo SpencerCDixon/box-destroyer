@@ -37,7 +37,7 @@ export class Board {
             changeGold,
           });
         } else if (PATH_REG.test(tile)) {
-          // save coordinates for path
+          // save coordinates for path to simplify enemy movement
           this.pathCache[tile] = loc;
           return new Tile({
             pathNum: tile, 
@@ -58,8 +58,8 @@ export class Board {
 
   attackTile(row, col, dmg) {
     this.tileAt(row, col).enemies.forEach(enemy => {
-      enemy.health = enemy.health - dmg
-      if (enemy.health <= 0) {
+      enemy.attack(dmg)
+      if (enemy.isDead()) {
         this.tileAt(row, col).killEnemy(enemy);
       }
     });

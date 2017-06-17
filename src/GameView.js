@@ -5,6 +5,10 @@ import { levelOne, levelTwo, levelThree, levelFour, levelFive, levelSix, levelSe
 import { towerTypes, towers, shopTowerTypes } from './constants.js';
 import { isUndefined } from 'lodash';
 
+import Level from './Level.js';
+import SelectedTower from './SelectedTower.js';
+import Shop from './Shop.js';
+
 const Overlay = ({children}) => 
   <div className="overlay flex-center">
     <h1 className="paused">{children}</h1>
@@ -33,7 +37,7 @@ class GameView extends Component {
 
   componentDidMount() {
     this.game = new Game(
-      levelEight, 
+      levelOne, 
       this.handleOver, 
       this.handleWin,
       this.changeGold,
@@ -78,67 +82,24 @@ class GameView extends Component {
   render() {
     return (
       <div>
-        <button className="btn" style={{position: 'absolute', top: 20, left: 20}} onClick={this.togglePause}>
-          {this.state.paused ? 'Unpause' : 'Pause'}
-        </button>
+        <Shop
+          allowedTowers={levelOne.allowedTowers}
+          selectedTower={this.state.selectedTower}
+          onSelect={this.selectTower}
+          gold={this.state.gold}
+        />
 
-        <div className="tower-selector">
-          {this.state.game && this.state.game.allowedTowers.map(type => {
-            const tower = new towerTypes[type]();
 
-            return (
-              <div>
-                <div 
-                  className={cn({
-                    tower: true,
-                    selected: this.state.selectedTower === type,
-                  })} 
-                  onClick={this.selectTower.bind(this, type)}
-                >
-                  {tower.render()}
-                </div>
-                <p style={{textAlign: 'center', color: 'white'}}>${towers[type].price}</p>
-              </div>
-            );
-          })}
-        </div>
+        <SelectedTower selectedTower={this.state.selectedTower} />
 
-        <div className="money-container">
-          <h3>Gold: $  {this.state.gold}</h3>
-        </div>
-
-        {this.state.selectedTower && (
-          <div className="tower-desc" style={{position: 'absolute', top: 100, left: 20}}>
-            <header>
-              {new towerTypes[this.state.selectedTower]().render()}
-            </header>
-
-            <h3>Name: {this.state.selectedTower}</h3>
-            <h3>Price: {towers[this.state.selectedTower].price}</h3>
-            <h3>Range: </h3>
-            <p>{towers[this.state.selectedTower].rangeDesc}</p>
-          </div>
-        )}
-
-        {this.state.game && (
-          <div className="game">
-            <CurrentTurn>{this.state.game.tick}</CurrentTurn>
-
-            {this.state.game.board.tiles.map((row, i) => {
-              return (
-                <div className="row" key={`row-${i}`}>
-                  {row.map((tile, i) => {
-                    return tile.render(this.addTower.bind(this, tile))
-                  })}
-                </div>
-              )
-            })}
-
-            {this.isPaused && <Overlay>Paused</Overlay>}
-            {this.isOver && <Overlay>Game Over</Overlay>}
-            {this.isWon && <Overlay>You Win!</Overlay>}
-          </div>
-        )}
+        <Level 
+          gameState={this.state.gameState}
+          onLose={this.handleOver}
+          onWin={this.handleWin}
+          addTower={this.addTower}
+          level={levelOne}
+          changeGold={this.changeGold}
+        />
       </div>
     );
   }
