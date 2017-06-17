@@ -4,15 +4,17 @@ import { range } from 'lodash';
 
 const Wrapper = styled.div`
   width: 100%;
-  height: 25px;
   display: flex;
 `;
 
 const Level = styled.div`
   width: 30%;
-  height: 25px;
-  margin: 0 3px;
   background: ${props => props.complete ? 'black' : 'gray'};
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 0;
 `
 
 class CampaignProgress extends Component {
@@ -26,9 +28,12 @@ class CampaignProgress extends Component {
       <Wrapper>
         {range(this.props.totalLevels).map((l, i) => (
           <Level 
+            key={i}
             complete={this.props.levelsComplete > i} 
             totalLevels={this.props.totalLevels}
-          />
+          >
+            {i + 1}
+          </Level>
         ))}
       </Wrapper>
     );

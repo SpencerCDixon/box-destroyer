@@ -4,19 +4,40 @@ import { gameStates } from './constants.js';
 import * as levels from './models/levels.js';
 import styled from 'styled-components'
 import { didWin, didLose } from './towers/util';
+import { flex } from './styles';
+import { Button } from './styles/Button.js';
 
 const Gold = styled.div`
   color: goldenrod;
   position: absolute;
-  top: 20px;
-  left: 20px;
-`
+  top: -30px;
+  font-size: 1.5em;
+`;
 
 const CurrentTurn = styled.div`
   color: white;
   position: absolute;
-  top: 20px;
-  right: 20px;
+  top: -30px;
+  right: 1px;
+  font-size: 1.5em;
+`;
+
+const Overlay = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  top: 0;
+  left: 0;
+  ${flex.center}
+  flex-direction: column;
+`;
+
+const Header = styled.h1`
+  color: white;
+  text-align: center;
+  margin: 10px 0;
+  font-size: ${props => props.large ? '5em' : '2em'};
 `
 
 class Level extends Component {
@@ -83,10 +104,25 @@ class Level extends Component {
 
     return (
       <div className="game">
-        {didLose(this.props.gameState) && <button onClick={this.reset}>reset</button>}
-        {didWin(this.props.gameState) && <button onClick={this.reset}>nextLevel</button>}
-        <CurrentTurn>{this.state.game.tick}</CurrentTurn>
-        <Gold>{this.state.game.gold}</Gold>
+        {didLose(this.props.gameState) && (
+          <Overlay>
+            <Header>You lose... fucking idiot.</Header>
+            <Header large>😂</Header>
+            <Button onClick={this.reset}>
+              Try Again
+            </Button>
+          </Overlay>
+        )}
+        {didWin(this.props.gameState) && (
+          <Overlay>
+            <Header>Nice job human.</Header>
+            <Header large>😖</Header>
+            <Button onClick={this.reset}>Next Level</Button>
+          </Overlay>
+        )}
+
+        <CurrentTurn>⏱ {this.state.game.tick}</CurrentTurn>
+        <Gold>💰 {this.state.game.gold}</Gold>
 
         {this.state.game.board.tiles.map((row, i) => {
           return (
@@ -97,10 +133,6 @@ class Level extends Component {
             </div>
           )
         })}
-
-        {/* this.isPaused && <Overlay>Paused</Overlay> */}
-        {/* this.isOver && <Overlay>Game Over</Overlay> */}
-        {/* this.isWon && <Overlay>You Win!</Overlay> */}
       </div>
     );
   }

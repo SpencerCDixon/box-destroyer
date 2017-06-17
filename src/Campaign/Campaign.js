@@ -19,6 +19,7 @@ import {
   Metrics,
   PlayingField,
   FlexColumn,
+  LevelContainer,
 } from './styles';
 
 
@@ -73,14 +74,16 @@ class Campaign extends Component {
           </Metrics>
 
           <PlayingField>
-            <Level
-              level={this.currentLevel}
-              gameState={this.state.gameState}
-              onWin={this.handleWin}
-              onLose={this.handleLose}
-              onReset={this.handleReset}
-              selectedTower={this.state.selectedTower}
-            />
+            <LevelContainer>
+              <Level
+                level={this.currentLevel}
+                gameState={this.state.gameState}
+                onWin={this.handleWin}
+                onLose={this.handleLose}
+                onReset={this.handleReset}
+                selectedTower={this.state.selectedTower}
+              />
+            </LevelContainer>
 
             <div style={{flex: 1}} />
 
