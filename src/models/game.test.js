@@ -190,6 +190,28 @@ describe('game integretion tests', function() {
           expect(onLose).not.toBeCalled();
         });
       });
+
+      describe('column tower', function() {
+        it('attacks every square in the column', function() {
+          const blueprint = [
+            [1, 'X', 'X', 12, 'column'],
+            [2, 'X', 'X', 11, 10],
+            [3, 'X', 'X', 'X', 9],
+            [4, 5, 6, 7, 8],
+            ['column', 'X', 'X', 'X', 'X'],
+          ];
+          const enemy = generateMockEnemy(240, 10)
+          const enemies = { 1: enemy };
+          const level = generateLevel(blueprint, enemies);
+          const [onWin, onLose] = [jest.fn(), jest.fn()];
+          const game = new Game(level, onWin, onLose);
+
+          fastForward(game, 9);
+
+          expect(onWin).toBeCalled();
+          expect(onLose).not.toBeCalled();
+        });
+      });
     });
   });
 });

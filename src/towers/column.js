@@ -11,7 +11,7 @@ export class ColumnTower extends Tower {
   }
 
   attack(board) {
-    this.range().forEach(coord => {
+    this.range(board).forEach(coord => {
       const [x, y] = coord;
       if (board.tileAt(x, y).isEnemy()) {
         board.attackTile(x, y, towers.column.dmg);
@@ -19,9 +19,10 @@ export class ColumnTower extends Tower {
     });
   }
 
-  range() {
+  range(board) {
     const [row, col] = this.tile.loc;
-    const wholeRow = range(9);
+    const length = board.tiles.length
+    const wholeRow = range(length);
     return wholeRow.map(newRow => [newRow, col]);
   }
 
