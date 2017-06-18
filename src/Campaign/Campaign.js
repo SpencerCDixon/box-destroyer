@@ -4,7 +4,7 @@ import {
   levelFive, levelSix, levelSeven, levelEight 
 } from '../models/levels';
 import { gameStates, towers } from '../constants.js';
-
+import { isPaused } from '../towers/util';
 
 // Game Components
 import Level from '../Level.js';
@@ -41,6 +41,14 @@ class Campaign extends Component {
     gameState: 'running',
   }
 
+  componentDidMount() {
+    document.addEventListener('keydown', this.handleKeyPress)
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.handleKeyPress)
+  }
+
   get currentLevel() {
     return this.state.levels[this.state.currentLevel]
   }
@@ -55,6 +63,26 @@ class Campaign extends Component {
       currentLevel: ++this.state.currentLevel,
       levelsComplete: ++this.state.levelsComplete, // TODO: don't think I need this, can use CL
     });
+  }
+
+  handleKeyPress = ({keyCode}) => {
+    // if key pressed is between 1 and 9
+    if (keyCode >= 49 && keyCode < 58) {
+      const idx = keyCode - 49;
+      if (idx + 1 <= this.currentLevel.allowedTowers.length) {
+        const selectedTower = this.currentLevel.allowedTowers[idx];
+        this.handleSelectTower(selectedTower);
+      }
+    }
+
+    // space bar - toggle pause
+    if (keyCode === 32) {
+      if (isPaused(this.state.gameState)) {
+        this.setState({gameState: gameStates.running})
+      } else {
+        this.setState({gameState: gameStates.paused})
+      }
+    }
   }
 
   render() {

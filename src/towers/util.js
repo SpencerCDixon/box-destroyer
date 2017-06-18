@@ -13,3 +13,7 @@ export function didLose(state) {
 export function didWin(state) {
   return gameStates.win === state;
 }
+
+export function isPaused(state) {
+  return gameStates.paused === state;
+}

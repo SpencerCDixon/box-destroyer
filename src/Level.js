@@ -3,7 +3,7 @@ import { Game } from './models/game.js';
 import { gameStates } from './constants.js';
 import * as levels from './models/levels.js';
 import styled from 'styled-components'
-import { didWin, didLose } from './towers/util';
+import { isPaused, didWin, didLose } from './towers/util';
 import { flex } from './styles';
 import { Button } from './styles/Button.js';
 
@@ -70,12 +70,12 @@ class Level extends Component {
     clearInterval(this.loop);
   }
 
-  componentWillReceiveProps(nextProps) {
-    console.log({props: this.props, nextProps});
-    if (this.props.level !== nextProps.level) {
-      console.log('new level');
-    }
-  }
+  // componentWillReceiveProps(nextProps) {
+    // console.log({props: this.props, nextProps});
+    // if (this.props.level !== nextProps.level) {
+      // console.log('new level');
+    // }
+  // }
 
   addTower = tile => {
     const { selectedTower } = this.props
@@ -119,6 +119,12 @@ class Level extends Component {
             <Header>Nice job human.</Header>
             <Header large>😖</Header>
             <Button onClick={this.reset}>Next Level</Button>
+          </Overlay>
+        )}
+        {isPaused(this.props.gameState) && (
+          <Overlay>
+            <Header>Paused</Header>
+            <Header large>⏸</Header>
           </Overlay>
         )}
 
