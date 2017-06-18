@@ -83,4 +83,113 @@ describe('game integretion tests', function() {
       expect(game.gold).toEqual(220);
     });
   });
+
+  describe('towerRanges', function() {
+    describe('stage-1 towers', function() {
+      describe('cross tower', function() {
+        it('attacks from all 4 sides', function() {
+          const blueprint = [
+            [1, 8, 7],
+            [2, 'cross', 6],
+            [3, 4, 5],
+          ];
+          const enemy = generateMockEnemy(120, 10)
+          const enemies = { 1: enemy };
+          const level = generateLevel(blueprint, enemies);
+          const [onWin, onLose] = [jest.fn(), jest.fn()];
+          const game = new Game(level, onWin, onLose);
+
+          fastForward(game, 7);
+
+          expect(onWin).toBeCalled();
+          expect(onLose).not.toBeCalled();
+        });
+      });
+
+      describe('horizontal tower', function() {
+        it('attacks from left and right', function() {
+          const blueprint = [
+            [1, 8, 7],
+            [2, 'horizontal', 6],
+            [3, 4, 5],
+          ];
+          const enemy = generateMockEnemy(80, 10)
+          const enemies = { 1: enemy };
+          const level = generateLevel(blueprint, enemies);
+          const [onWin, onLose] = [jest.fn(), jest.fn()];
+          const game = new Game(level, onWin, onLose);
+
+          fastForward(game, 5);
+
+          expect(onWin).toBeCalled();
+          expect(onLose).not.toBeCalled();
+        });
+      });
+
+      describe('vertical tower', function() {
+        it('attacks from below and above', function() {
+          const blueprint = [
+            [1, 8, 7],
+            [2, 'vertical', 6],
+            [3, 4, 5],
+          ];
+          const enemy = generateMockEnemy(80, 10)
+          const enemies = { 1: enemy };
+          const level = generateLevel(blueprint, enemies);
+          const [onWin, onLose] = [jest.fn(), jest.fn()];
+          const game = new Game(level, onWin, onLose);
+
+          fastForward(game, 7);
+
+          expect(onWin).toBeCalled();
+          expect(onLose).not.toBeCalled();
+        });
+      });
+    });
+
+    describe('stage-2 towers', function() {
+      describe('surround tower', function() {
+        it('attacks every square around it', function() {
+          const blueprint = [
+            [1, 10, 'X'],
+            [2, 9, 8],
+            [3, 'surround', 7],
+            [4, 5, 6],
+          ];
+          const enemy = generateMockEnemy(240, 10)
+          const enemies = { 1: enemy };
+          const level = generateLevel(blueprint, enemies);
+          const [onWin, onLose] = [jest.fn(), jest.fn()];
+          const game = new Game(level, onWin, onLose);
+
+          fastForward(game, 8);
+
+          expect(onWin).toBeCalled();
+          expect(onLose).not.toBeCalled();
+        });
+      });
+
+      describe('array tower', function() {
+        it('attacks every square in the row', function() {
+          const blueprint = [
+            [1, 'X', 'X', 'X', 'X'],
+            [2, 'X', 'X', 'X', 11],
+            [3, 6, 7, 'X', 10],
+            [4, 5, 'array', 8, 9],
+            ['X', 'X', 'X', 'X', 'X'],
+          ];
+          const enemy = generateMockEnemy(160, 10)
+          const enemies = { 1: enemy };
+          const level = generateLevel(blueprint, enemies);
+          const [onWin, onLose] = [jest.fn(), jest.fn()];
+          const game = new Game(level, onWin, onLose);
+
+          fastForward(game, 8);
+
+          expect(onWin).toBeCalled();
+          expect(onLose).not.toBeCalled();
+        });
+      });
+    });
+  });
 });
