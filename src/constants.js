@@ -69,8 +69,8 @@ export const enemies = {
   },
   advanced: {
     health: 300,
-    tickMult: 10,
     value: 20,
+    tickMult: 10,
   },
   superior: {
     health: 300,

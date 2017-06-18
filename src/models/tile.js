@@ -88,4 +88,11 @@ export class Tile {
     this.game.changeGold(enemy.value);
     this.enemies = this.enemies.filter(e => e !== enemy);
   }
+
+  adminPlaceTower(towerType) {
+    console.log('Placing: ', towerType);
+    this.placeable = false;
+    this.tower = new towerTypes[towerType](this, towerType);
+    console.log('Tower: ', this.tower);
+  }
 }
