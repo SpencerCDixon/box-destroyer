@@ -10,15 +10,16 @@ import { Button } from './styles/Button.js';
 const Gold = styled.div`
   color: goldenrod;
   position: absolute;
-  top: -30px;
+  top: 20px;
+  left: 20px;
   font-size: 1.5em;
 `;
 
 const CurrentTurn = styled.div`
   color: white;
   position: absolute;
-  top: -30px;
-  right: 1px;
+  top: 20px;
+  right: 20px;
   font-size: 1.5em;
 `;
 

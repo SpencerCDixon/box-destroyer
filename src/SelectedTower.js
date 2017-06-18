@@ -27,6 +27,7 @@ const Tower = styled.div`
 `
 
 const Desc = styled.p`
+  padding: 0 15px;
   color: white;
   text-align: center;
 `
