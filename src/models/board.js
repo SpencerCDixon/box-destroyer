@@ -1,9 +1,9 @@
 import { Tile } from './tile';
 import { shopTowerTypes, gameStates, enemyTypes } from '../constants.js';
-import { toNumber } from 'lodash';
+import { isFunction, isString, toNumber } from 'lodash';
 
-const PLACEABLE_TILE = "P";
-const UNPLACEABLE_TILE = "X";
+const PLACEABLE_TILE = 'P';
+const UNPLACEABLE_TILE = 'X';
 const PATH_REG = /\d/
 
 export class Board {
@@ -89,9 +89,17 @@ export class Board {
   }
 
   spawn(enemyType, tick) {
-    this.spawnTile().enemies.push(
-      new enemyTypes[enemyType](tick)
-    );
+    let newEnemy;
+
+    if (isString(enemyType)) {
+      newEnemy = new enemyTypes[enemyType](tick)
+    } else if (isFunction(enemyType)) {
+      newEnemy = enemyType(tick);
+    } else {
+      throw new Error('Spawned enemies must be a string or function');
+    }
+
+    this.spawnTile().enemies.push(newEnemy);
   }
 
   // start at the last path and move enemies to the next path
