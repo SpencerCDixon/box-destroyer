@@ -94,7 +94,7 @@ export class Board {
     if (isString(enemyType)) {
       newEnemy = new enemyTypes[enemyType](tick)
     } else if (isFunction(enemyType)) {
-      newEnemy = enemyType(tick);
+      newEnemy = new enemyType(tick);
     } else {
       throw new Error('Spawned enemies must be a string or function');
     }
