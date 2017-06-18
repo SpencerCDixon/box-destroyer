@@ -54,4 +54,13 @@ describe('buildLevel()', function() {
 
     expect(tower.isTower()).toEqual(true);
   });
+
+  it('throws when it doesnt know a kind of tile', function() {
+    const blueprint = [
+      ['P', 1, 'P'],
+      ['wtf is this', 2, 3],
+      ['X', 'X', 4],
+    ];
+    expect(() => mockBoard(blueprint)).toThrow(/with: wtf is this/);
+  });
 });

@@ -27,9 +27,9 @@ export class Game {
   }
 
   update(tick) {
+    this.checkForWin();
     this.updateEnemies(tick);
     this.updateTowers();
-    this.checkForWin();
   }
 
   updateEnemies(tick) {

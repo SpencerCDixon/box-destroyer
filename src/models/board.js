@@ -13,7 +13,7 @@ export class Board {
     this.onLose = onLose;
     this.game = game;
 
-    // path cache
+    // path cache used to move enemies
     this.pathCache = {};
 
     // buildLevel
