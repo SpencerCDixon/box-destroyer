@@ -3,10 +3,10 @@ import { toNumber, has } from 'lodash';
 import { gameStates } from '../constants.js';
 
 export class Game {
-  constructor(level, onWin, onLose, changeGold) {
+  constructor(level, onWin, onLose) {
     const { mapBlueprint, enemyBlueprint, goldStart, allowedTowers } = level;
     this.tick = 0;
-    this.board = new Board(this, mapBlueprint, onLose, changeGold)
+    this.board = new Board(this, mapBlueprint, onLose)
     this.gold = goldStart;
 
     // Used to change game from win/lose/paused

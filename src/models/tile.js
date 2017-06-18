@@ -90,9 +90,7 @@ export class Tile {
   }
 
   adminPlaceTower(towerType) {
-    console.log('Placing: ', towerType);
     this.placeable = false;
     this.tower = new towerTypes[towerType](this, towerType);
-    console.log('Tower: ', this.tower);
   }
 }

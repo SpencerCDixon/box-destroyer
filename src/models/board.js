@@ -7,7 +7,7 @@ const UNPLACEABLE_TILE = "X";
 const PATH_REG = /\d/
 
 export class Board {
-  constructor(game, blueprint, onLose, changeGold) {
+  constructor(game, blueprint, onLose) {
     // holds all tile info
     this.tiles = [];
     this.onLose = onLose;
@@ -17,10 +17,10 @@ export class Board {
     this.pathCache = {};
 
     // buildLevel
-    this.buildLevel(blueprint, changeGold);
+    this.buildLevel(blueprint);
   }
 
-  buildLevel(blueprint, changeGold) {
+  buildLevel(blueprint) {
     this.tiles = blueprint.map((row, rIdx) => {
       return row.map((tile, tIdx) => {
         const loc = [rIdx, tIdx];
