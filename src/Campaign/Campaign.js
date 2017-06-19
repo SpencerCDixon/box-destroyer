@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { inject, observer } from 'mobx-react';
 import { 
   levelOne, levelTwo, levelThree, levelFour, 
   levelFive, levelSix, levelSeven, levelEight 
@@ -23,6 +24,8 @@ import {
 } from './styles';
 
 
+@inject('store')
+@observer
 class Campaign extends Component {
   state = {
     currentLevel: 0,
@@ -86,10 +89,15 @@ class Campaign extends Component {
   }
 
   render() {
+    console.log(this.props);
     return (
       <Wrapper>
         <Sidebar>
           <SelectedTower selectedTower={this.state.selectedTower} />
+          <div>
+            <h1 onClick={this.props.store.game.nextLevel}>Level</h1>
+            {this.props.store.game.level}
+          </div>
         </Sidebar>
 
         <FlexColumn>
