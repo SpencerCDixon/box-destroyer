@@ -1,7 +1,6 @@
 import { Game } from './game.js';
 import { Enemy } from '../enemies/enemy.js';
 
-
 // generateMockEnemy returns a new enemy type that can be used in tests
 function generateMockEnemy(health, gold) {
   return class MockEnemy extends Enemy {
@@ -16,16 +15,9 @@ function generateMockEnemy(health, gold) {
 }
 
 // generateLevel normalizes creating level objects so when things change in future it's easy
-// to update tests
-function generateLevel(mapBlueprint, enemyBlueprint) {
-  return {
-    mapBlueprint,
-    enemyBlueprint,
-    allowedTowers: [
-      'cross',
-    ],
-    goldStart: 200,
-  }
+// to update tests.  Sensible defaults added for towers/gold.
+function generateLevel(mapBlueprint, enemyBlueprint, allowedTowers = [ 'cross' ], goldStart = 200) {
+  return { mapBlueprint, enemyBlueprint, allowedTowers, goldStart };
 }
 
 // fastForward is a utility function to move the game along to assert outcomes
@@ -37,7 +29,7 @@ function fastForward(game, ticks) {
 }
 
 describe('game integretion tests', function() {
-  describe('player can win and lose', function() {
+  describe('player can win/lose and get gold', function() {
     const blueprint = [
       [1, 'X', 7],
       [2, 'cross', 6],
@@ -70,7 +62,7 @@ describe('game integretion tests', function() {
       expect(onLose).toBeCalled();
     });
 
-    it('gives the player gold to kill enemies', function() {
+    it('gives the player gold when enemy dies', function() {
       const enemy = generateMockEnemy(90, 10)
       const enemies = { 1: enemy, 2: enemy };
       const level = generateLevel(blueprint, enemies);
