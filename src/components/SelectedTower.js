@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import styled from 'styled-components';
 import { inject, observer } from 'mobx-react';
-import { towerTypes, shopTowerTypes, towers } from './constants.js';
-import { flex } from './styles';
+import { towerTypes, shopTowerTypes, towers } from '../constants';
+import { flex } from '../styles';
 
 const Container = styled.section`
   width: 100%;
@@ -33,13 +33,13 @@ const Desc = styled.p`
   text-align: center;
 `
 
-@inject((stores, props, context) => ({
+@inject(stores => ({
   selectedTower: stores.game.selectedTower
 }))
 @observer
 class SelectedTower extends Component {
   static propTypes = {
-    selectedTower: PropTypes.object.isRequired,
+    selectedTower: PropTypes.string.isRequired,
   }
 
   render() {

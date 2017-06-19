@@ -1,5 +1,9 @@
 import { CrossHairTower, VerticalTower, HorizontalTower, SurroundTower, ArrayTower, ColumnTower } from './towers';
 import { BasicEnemy, AdvancedEnemy, SuperiorEnemy } from './enemies';
+import { 
+  levelOne, levelTwo, levelThree, levelFour, 
+  levelFive, levelSix, levelSeven, levelEight 
+} from './models/levels';
 
 // All possible states a level can be in
 export const gameStates = {
@@ -8,6 +12,22 @@ export const gameStates = {
   paused: 'paused',
   running: 'running',
 }
+
+// Game Worlds
+export const worlds = {
+  1: {
+    levels: [
+      levelOne,
+      levelTwo,
+      levelThree,
+      levelFour,
+      levelFive,
+      levelSix,
+      levelSeven,
+      levelEight,
+    ],
+  },
+};
 
 // -------
 // Towers

@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import styled from 'styled-components';
+import { inject, observer } from 'mobx-react';
 import { range } from 'lodash';
 
 const Wrapper = styled.div`
@@ -17,22 +18,31 @@ const Level = styled.div`
   padding: 8px 0;
 `
 
+@inject(stores => ({
+  totalLevels: stores.game.totalWorldLevels,
+  levelsComplete: stores.game.level,
+  world: stores.game.world,
+}))
+@observer
 class CampaignProgress extends Component {
   static propTypes = {
     levelsComplete: PropTypes.number.isRequired,
     totalLevels: PropTypes.number.isRequired,
+    world: PropTypes.number.isRequired,
   }
 
   render() {
+    const { world, totalLevels, levelsComplete } = this.props;
+
     return (
       <Wrapper>
-        {range(this.props.totalLevels).map((l, i) => (
+        {range(totalLevels).map((l, i) => (
           <Level 
             key={i}
-            complete={this.props.levelsComplete > i} 
-            totalLevels={this.props.totalLevels}
+            complete={levelsComplete > i} 
+            totalLevels={totalLevels}
           >
-            {i + 1}
+            {world}-{i + 1}
           </Level>
         ))}
       </Wrapper>

@@ -1,8 +1,8 @@
 import React, { PropTypes, Component } from 'react';
-import { towerTypes, shopTowerTypes, towers } from './constants.js';
+import { inject, observer } from 'mobx-react';
+import { towerTypes, towers } from '../constants';
 import styled, {css} from 'styled-components';
-import cn from 'classnames';
-import { Button } from './styles/Button.js';
+import Button from './Button';
 
 const Price = styled.p`
   textAlign: center;
@@ -28,6 +28,12 @@ const TowerContainer = styled.div`
   `}
 `
 
+@inject(stores => ({
+  allowedTowers: stores.game.allowedTowers,
+  selectedTower: stores.game.selectedTower,
+  onSelect: stores.game.selectTower,
+}))
+@observer(['game'])
 export default class Shop extends Component {
   static propTypes = {
     allowedTowers: PropTypes.array.isRequired,
