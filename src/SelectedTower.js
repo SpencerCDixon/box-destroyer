@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import styled from 'styled-components';
+import { inject, observer } from 'mobx-react';
 import { towerTypes, shopTowerTypes, towers } from './constants.js';
 import { flex } from './styles';
 
@@ -32,13 +33,17 @@ const Desc = styled.p`
   text-align: center;
 `
 
+@inject((stores, props, context) => ({
+  selectedTower: stores.game.selectedTower
+}))
+@observer
 class SelectedTower extends Component {
   static propTypes = {
-    selectedTower: PropTypes.oneOf(shopTowerTypes),
+    selectedTower: PropTypes.object.isRequired,
   }
 
   render() {
-    const { selectedTower } = this.props;
+    const {selectedTower} = this.props;
 
     return (
       <Container className="tower-desc">

@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { inject, observer } from 'mobx-react';
+import { observer } from 'mobx-react';
 import { 
   levelOne, levelTwo, levelThree, levelFour, 
   levelFive, levelSix, levelSeven, levelEight 
@@ -24,9 +24,12 @@ import {
 } from './styles';
 
 
-@inject('store')
-@observer
+@observer(['game'])
 class Campaign extends Component {
+  static propTypes = {
+    store: PropTypes.object.isRequired,
+  }
+
   state = {
     currentLevel: 0,
     levels: [
@@ -56,7 +59,9 @@ class Campaign extends Component {
     return this.state.levels[this.state.currentLevel]
   }
 
-  handleSelectTower = selectedTower => this.setState({selectedTower})
+  handleSelectTower = selectedTower => {
+    this.props.game.selectTower(selectedTower);
+  }
   handleLose = () => this.setState({gameState: gameStates.lost});
   handleReset = () => this.setState({gameState: gameStates.running});
 
@@ -89,22 +94,19 @@ class Campaign extends Component {
   }
 
   render() {
-    console.log(this.props);
+    const {game}= this.props;
+
     return (
       <Wrapper>
         <Sidebar>
-          <SelectedTower selectedTower={this.state.selectedTower} />
-          <div>
-            <h1 onClick={this.props.store.game.nextLevel}>Level</h1>
-            {this.props.store.game.level}
-          </div>
+          <SelectedTower />
         </Sidebar>
 
         <FlexColumn>
           <Metrics>
             <Shop
               allowedTowers={this.currentLevel.allowedTowers}
-              selectedTower={this.state.selectedTower}
+              selectedTower={game.selectedTower}
               onSelect={this.handleSelectTower}
             />
           </Metrics>
@@ -117,7 +119,7 @@ class Campaign extends Component {
                 onWin={this.handleWin}
                 onLose={this.handleLose}
                 onReset={this.handleReset}
-                selectedTower={this.state.selectedTower}
+                selectedTower={game.selectedTower}
               />
             </LevelContainer>
 

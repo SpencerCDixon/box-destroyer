@@ -7,7 +7,7 @@ import store from './stores';
 class App extends Component {
   render() {
     return (
-      <Provider store={store}>
+      <Provider game={store.game}>
         <div>
           <Campaign />
           {process.env.NODE_ENV !== 'production' && (
