@@ -112,7 +112,7 @@ class Level extends Component {
 
     return (
       <div className="game">
-        {didLose(game.gameState) && !console.log('lost') && (
+        {didLose(game.gameState) && (
           <Overlay>
             <Header>You lose... fucking idiot.</Header>
             <Header large>😂</Header>

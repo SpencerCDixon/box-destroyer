@@ -6,5 +6,5 @@ const sx = {
 };
 
 export function OffLimits() {
-  return <Tile style={sx} />
+  return <Tile className="water" style={sx} />
 }

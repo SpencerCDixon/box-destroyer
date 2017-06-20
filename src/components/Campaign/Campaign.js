@@ -15,10 +15,11 @@ import GameDevTools from '../GameDevTools.js';
 import { 
   Wrapper,
   Sidebar,
-  Metrics,
+  ShopContainer,
   PlayingField,
   FlexColumn,
   LevelContainer,
+  Row,
 } from './styles';
 
 
@@ -72,28 +73,28 @@ class Campaign extends Component {
   render() {
     return (
       <Wrapper>
-        <Sidebar>
-          <SelectedTower />
-        </Sidebar>
-
         <FlexColumn>
-          <Metrics>
+          <ShopContainer>
             <Shop />
-          </Metrics>
+          </ShopContainer>
 
           <PlayingField>
             <GameControls />
 
-            <LevelContainer>
-              <Level
-                onWin={this.handleWin}
-                onLose={this.handleLose}
-                onReset={this.handleReset}
-                speed={this.props.game.tickSpeed}
-              />
-            </LevelContainer>
+            <Row>
+              <Sidebar>
+                <SelectedTower />
+              </Sidebar>
 
-            <div style={{flex: 1}} />
+              <LevelContainer>
+                <Level
+                  onWin={this.handleWin}
+                  onLose={this.handleLose}
+                  onReset={this.handleReset}
+                  speed={this.props.game.tickSpeed}
+                />
+              </LevelContainer>
+            </Row>
 
             <CampaignProgress />
           </PlayingField>

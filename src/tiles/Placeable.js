@@ -6,5 +6,5 @@ const sx = {
 };
 
 export function Placeable(props) {
-  return <Tile onClick={props.click} style={sx} />
+  return <Tile className="grass" onClick={props.click} style={sx} />
 }

@@ -6,17 +6,12 @@ export const Wrapper = styled.div`
   display: flex;
 `
 
-export const Sidebar = styled.aside`
-  width: 20%;
-  height: 100vh;
-  background: #393E46;
-`
-
-export const Metrics = styled.section`
+export const ShopContainer = styled.section`
   width: 100%;
   height: 20vh;
   background: #222831;
 `
+
 
 export const PlayingField = styled.section`
   width: 100%;
@@ -26,18 +21,27 @@ export const PlayingField = styled.section`
   flex-direction: column
 `
 
+export const Sidebar = styled.aside`
+  width: 20%;
+  background: #393E46;
+`
+
 export const FlexColumn = styled.div`
-  width: 100%;
+  width: 100vw;
   height: 100vh;
   display: flex;
   flex-direction: column;
 `
 
 export const LevelContainer = styled.div`
-  width: 100%;
+  width: 80%;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   background: #708090;
 `;
+
+export const Row = styled.div`
+  display: flex;
+`

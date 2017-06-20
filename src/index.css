@@ -49,3 +49,17 @@ button::-moz-focus-inner {
 .rc-slider-track {
   background-color: #55acee !important;
 }
+
+.path-tile {
+  background-image: 
+    linear-gradient( rgba(249, 237, 105, .2), rgba(249, 237, 105, .2)),
+    url(./images/hip-square.png) !important;
+}
+
+.grass {
+  background-image: url(./images/grass-3.png) !important;
+}
+
+.water {
+  background-image: url(./images/water-3.png) !important;
+}

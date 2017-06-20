@@ -12,7 +12,7 @@ const sx = {
 
 export function Path({enemies}) {
   return (
-    <Tile style={sx}>
+    <Tile className="path-tile" style={sx}>
       {enemies.map(e => 
         e.type === 'basic' 
         ?  <BasicEnemy current={e.health} total={e.totalHealth} />
