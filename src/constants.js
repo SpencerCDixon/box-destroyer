@@ -1,5 +1,8 @@
 import { CrossHairTower, VerticalTower, HorizontalTower, SurroundTower, ArrayTower, ColumnTower } from './towers';
-import { BasicEnemy, AdvancedEnemy, SuperiorEnemy, JesusEnemy } from './enemies';
+import { 
+  BasicEnemy, AdvancedEnemy, SuperiorEnemy, JesusEnemy,
+  LongEnemy, TallEnemy,
+} from './enemies';
 import { 
   levelOne, levelTwo, levelThree, levelFour, 
   levelFive, levelSix, levelSeven, levelEight 
@@ -100,6 +103,11 @@ export const enemies = {
     health: 90,
     tickMult: 5,
     value: 10,
+  },
+  long: {
+    health: 90,
+    tickMult: 5,
+    value: 10,
   }
 }
 
@@ -108,4 +116,6 @@ export const enemyTypes = {
   advanced: AdvancedEnemy,
   superior: SuperiorEnemy,
   jesus: JesusEnemy,
+  long: LongEnemy,
+  tall: TallEnemy,
 };
