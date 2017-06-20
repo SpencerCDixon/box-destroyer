@@ -1,6 +1,7 @@
 import styled from 'styled-components'
+import { reflex } from 'reflexbox';
 
-export default styled.button`
+export default reflex(styled.button`
   border-radius: 5px;
   padding: .5em .7em;
   font-size: 1em;
@@ -16,4 +17,4 @@ export default styled.button`
     transform: translate(0px, 5px);
     box-shadow: 0px 1px 0px 0px;
   }
-`
+`);

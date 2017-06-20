@@ -9,6 +9,7 @@ import SelectedTower from '../SelectedTower.js';
 import Shop from '../Shop.js';
 import CampaignProgress from '../CampaignProgress.js';
 import Button from '../Button.js';
+import GameControls from '../GameControls.js';
 
 // Campaign Styling
 import { 
@@ -68,17 +69,10 @@ class Campaign extends Component {
     }
   }
 
-  fast = () => {
-    this.props.game.updateTicker(60);
-  }
-
   render() {
     return (
       <Wrapper>
         <Sidebar>
-          <Button onClick={this.fast}>
-            Speed Up
-          </Button>
           <SelectedTower />
         </Sidebar>
 
@@ -88,6 +82,8 @@ class Campaign extends Component {
           </Metrics>
 
           <PlayingField>
+            <GameControls />
+
             <LevelContainer>
               <Level
                 onWin={this.handleWin}

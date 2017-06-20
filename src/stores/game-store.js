@@ -7,7 +7,7 @@ export class GameStore {
   @observable world = 1;
   @observable gameState = 'running';
   @observable selectedTower = 'cross';
-  @observable tickSpeed = 1000;
+  @observable tickSpeed = 500;
 
   // Actions that can change the state
   @action nextLevel = () => {
