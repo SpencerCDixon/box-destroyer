@@ -10,6 +10,7 @@ import Shop from '../Shop.js';
 import CampaignProgress from '../CampaignProgress.js';
 import Button from '../Button.js';
 import GameControls from '../GameControls.js';
+import GameDevTools from '../GameDevTools.js';
 
 // Campaign Styling
 import { 
@@ -98,6 +99,8 @@ class Campaign extends Component {
             <CampaignProgress />
           </PlayingField>
         </FlexColumn>
+
+        <GameDevTools />
       </Wrapper>
     );
   }
