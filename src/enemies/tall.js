@@ -5,8 +5,8 @@ import { isTallable } from '../util/enemies.js';
 export class TallEnemy extends Enemy {
   constructor(tick) {
     super();
-    this.health = enemies.jesus.health + enemies.jesus.tickMult * tick;
-    this.totalHealth = enemies.jesus.health + enemies.jesus.tickMult * tick;
+    this.health = enemies.tall.health + enemies.tall.tickMult * tick;
+    this.totalHealth = enemies.tall.health + enemies.tall.tickMult * tick;
     this.value = this.health / 10;
     this.type = 'tall';
   }

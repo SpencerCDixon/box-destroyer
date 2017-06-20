@@ -108,6 +108,11 @@ export const enemies = {
     health: 90,
     tickMult: 5,
     value: 10,
+  },
+  tall: {
+    health: 90,
+    tickMult: 5,
+    value: 10,
   }
 }
 

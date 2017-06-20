@@ -5,8 +5,8 @@ import { isLongable } from '../util/enemies.js';
 export class LongEnemy extends Enemy {
   constructor(tick) {
     super();
-    this.health = enemies.jesus.health + enemies.jesus.tickMult * tick;
-    this.totalHealth = enemies.jesus.health + enemies.jesus.tickMult * tick;
+    this.health = enemies.long.health + enemies.long.tickMult * tick;
+    this.totalHealth = enemies.long.health + enemies.long.tickMult * tick;
     this.value = this.health / 10;
     this.type = 'long';
   }
