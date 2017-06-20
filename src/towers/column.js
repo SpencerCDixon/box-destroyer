@@ -14,7 +14,7 @@ export class ColumnTower extends Tower {
     this.range(board).forEach(coord => {
       const [x, y] = coord;
       if (board.tileAt(x, y).isEnemy()) {
-        board.attackTile(x, y, towers.column.dmg);
+        board.attackTile(x, y, towers.column.dmg, this.type);
       }
     });
   }

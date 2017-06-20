@@ -63,15 +63,6 @@ export class Board {
     return this.tiles[row][col]
   }
 
-  attackTile(row, col, dmg) {
-    this.tileAt(row, col).enemies.forEach(enemy => {
-      enemy.attack(dmg)
-      if (enemy.isDead()) {
-        this.tileAt(row, col).killEnemy(enemy);
-      }
-    });
-  }
-
   // spawnTile iterates over the rows and columns to find the index of the tile
   // which has a pathNum equal to 1.  It then returns that tile.
   spawnTile() {
@@ -139,6 +130,15 @@ export class Board {
     });
     towers.forEach(towerTile => {
       towerTile.attack(this);
+    });
+  }
+
+  attackTile = (row, col, dmg, towerType) => {
+    this.tileAt(row, col).enemies.forEach(enemy => {
+      enemy.attack(dmg, towerType)
+      if (enemy.isDead()) {
+        this.tileAt(row, col).killEnemy(enemy);
+      }
     });
   }
 

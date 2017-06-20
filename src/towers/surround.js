@@ -14,7 +14,7 @@ export class SurroundTower extends Tower {
     this.range().forEach(coord => {
       const [x, y] = coord;
       if (board.tileAt(x, y).isEnemy()) {
-        board.attackTile(x, y, towers.surround.dmg);
+        board.attackTile(x, y, towers.surround.dmg, this.type);
       }
     });
   }

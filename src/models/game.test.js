@@ -206,4 +206,26 @@ describe('game integretion tests', function() {
       });
     });
   });
+
+  describe('unique enemy types', function() {
+    describe('cross/surround enemies', function() {
+      it('cant be damaged by cross/surround towers', function() {
+        const blueprint = [
+          [1, 10, 'X', 'X', 'X'],
+          [2, 9, 8, 'X', 'X',],
+          [3, 'cross', 7, 'horizontal', 'X'],
+          [4, 5, 6, 'X', 'X'],
+        ];
+        const enemies = { 1: 'jesus' };
+        const level = generateLevel(blueprint, enemies);
+        const [onWin, onLose] = [jest.fn(), jest.fn()];
+        const game = new Game(level, onWin, onLose);
+
+        fastForward(game, 8);
+
+        expect(onWin).toBeCalled();
+        expect(onLose).not.toBeCalled();
+      });
+    });
+  });
 });
