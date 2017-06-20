@@ -51,26 +51,37 @@ class Level extends Component {
     onWin: PropTypes.func.isRequired, 
     onLose: PropTypes.func.isRequired, 
     onReset: PropTypes.func.isRequired,
+    speed: PropTypes.number.isRequired,
   }
 
   componentDidMount() {
-    const { game, onWin, onLose } = this.props;
+    const { speed, game, onWin, onLose } = this.props;
     this.internalGame = new Game(game.currentLevel, onWin, onLose);
     this.loop = setInterval(() => {
       if (game.gameState === 'running') {
         this.setState({internalGame: this.internalGame.nextTick()});
       }
-    }, game.currentLevel.interval || game.tickSpeed) // Allow levels to have their own interval for sending enemies out.
+    }, speed) // Allow levels to have their own interval for sending enemies out.
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.game.currentLevel !== nextProps.game.currentLevel) {
-      console.log('levels changed');
+    if (this.props.speed !== nextProps.speed) {
+      this.speedUp(nextProps.speed);
     }
   }
 
   componentWillUnmount() {
     clearInterval(this.loop);
+  }
+
+  speedUp = (newSpeed) => {
+    const { game } = this.props;
+    clearInterval(this.loop);
+    this.loop = setInterval(() => {
+      if (game.gameState === 'running') {
+        this.setState({internalGame: this.internalGame.nextTick()});
+      }
+    }, newSpeed);
   }
 
   addTower = tile => {
@@ -80,7 +91,7 @@ class Level extends Component {
 
   reset = () => {
     clearInterval(this.loop);
-    const { game, onWin, onLose, onReset } = this.props;
+    const { speed, game, onWin, onLose, onReset } = this.props;
     // rebuild game, set it as current level, start loop back up.
     this.internalGame = new Game(game.currentLevel, onWin, onLose);
     this.setState({game: this.internalGame});
@@ -88,9 +99,8 @@ class Level extends Component {
       if (game.gameState === 'running') {
         this.setState({internalGame: this.internalGame.nextTick()});
       }
-    }, game.currentLevel.interval || game.tickSpeed) // Allow levels to have their own interval for sending enemies out.
+    }, speed) // Allow levels to have their own interval for sending enemies out.
 
-    // reset game state to running
     this.props.onReset();
   }
 

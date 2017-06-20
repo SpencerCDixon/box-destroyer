@@ -7,12 +7,10 @@ export function inRange([x, y]) {
 }
 
 export function didLose(state) {
-  console.log('didLose: ', state);
   return gameStates.lost === state;
 }
 
 export function didWin(state) {
-  console.log('didWin: ', state);
   return gameStates.win === state;
 }
 

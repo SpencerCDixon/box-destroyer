@@ -8,6 +8,7 @@ import Level from '../Level.js';
 import SelectedTower from '../SelectedTower.js';
 import Shop from '../Shop.js';
 import CampaignProgress from '../CampaignProgress.js';
+import Button from '../Button.js';
 
 // Campaign Styling
 import { 
@@ -67,10 +68,17 @@ class Campaign extends Component {
     }
   }
 
+  fast = () => {
+    this.props.game.updateTicker(60);
+  }
+
   render() {
     return (
       <Wrapper>
         <Sidebar>
+          <Button onClick={this.fast}>
+            Speed Up
+          </Button>
           <SelectedTower />
         </Sidebar>
 
@@ -85,6 +93,7 @@ class Campaign extends Component {
                 onWin={this.handleWin}
                 onLose={this.handleLose}
                 onReset={this.handleReset}
+                speed={this.props.game.tickSpeed}
               />
             </LevelContainer>
 

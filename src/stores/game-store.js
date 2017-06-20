@@ -7,7 +7,7 @@ export class GameStore {
   @observable world = 1;
   @observable gameState = 'running';
   @observable selectedTower = 'cross';
-  @observable tickSpeed = 500;
+  @observable tickSpeed = 1000;
 
   // Actions that can change the state
   @action nextLevel = () => {
@@ -22,6 +22,11 @@ export class GameStore {
   @action setState = newState => {
     // TODO: add checking that it's an allowed state
     this.gameState = newState
+  }
+
+  @action updateTicker = newSpeed => {
+    this.tickSpeed = newSpeed;
+    console.log({tickSpeed: this.tickSpeed});
   }
 
   // Computed Values
