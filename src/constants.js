@@ -3,10 +3,8 @@ import {
   BasicEnemy, AdvancedEnemy, SuperiorEnemy, JesusEnemy,
   LongEnemy, TallEnemy,
 } from './enemies';
-import { 
-  levelOne, levelTwo, levelThree, levelFour, 
-  levelFive, levelSix, levelSeven, levelEight 
-} from './models/levels';
+import worldOne from './models/world-1';
+import worldTwo from './models/world-2';
 
 // All possible states a level can be in
 export const gameStates = {
@@ -18,18 +16,8 @@ export const gameStates = {
 
 // Game Worlds
 export const worlds = {
-  1: {
-    levels: [
-      levelOne,
-      levelTwo,
-      levelThree,
-      levelFour,
-      levelFive,
-      levelSix,
-      levelSeven,
-      levelEight,
-    ],
-  },
+  1: worldOne,
+  2: worldTwo,
 };
 
 // -------
@@ -63,7 +51,7 @@ export const towers = {
     rangeDesc: "Does damage right and left.",
   },
   surround: {
-    dmg: 30,
+    dmg: 40,
     price: 200,
     rangeDesc: "Does damage to every surrounding tile",
   },
@@ -82,8 +70,6 @@ export const towers = {
 // -------
 // Enemies
 // -------
-
-
 export const enemies = {
   basic: {
     health: 90,
@@ -100,18 +86,18 @@ export const enemies = {
     value: 30,
   },
   jesus: {
-    health: 90,
-    tickMult: 5,
+    health: 50,
+    tickMult: 3,
     value: 10,
   },
   long: {
-    health: 90,
-    tickMult: 5,
+    health: 50,
+    tickMult: 3,
     value: 10,
   },
   tall: {
-    health: 90,
-    tickMult: 5,
+    health: 50,
+    tickMult: 3,
     value: 10,
   }
 }

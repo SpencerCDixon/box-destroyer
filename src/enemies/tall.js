@@ -7,7 +7,7 @@ export class TallEnemy extends Enemy {
     super();
     this.health = enemies.tall.health + enemies.tall.tickMult * tick;
     this.totalHealth = enemies.tall.health + enemies.tall.tickMult * tick;
-    this.value = this.health / 10;
+    this.value = (enemies.basic.health + enemies.basic.tickMult * tick) / 10;
     this.type = 'tall';
   }
 

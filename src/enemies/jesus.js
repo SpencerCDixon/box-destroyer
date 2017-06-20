@@ -7,7 +7,7 @@ export class JesusEnemy extends Enemy {
     super();
     this.health = enemies.jesus.health + enemies.jesus.tickMult * tick;
     this.totalHealth = enemies.jesus.health + enemies.jesus.tickMult * tick;
-    this.value = this.health / 10;
+    this.value = (enemies.basic.health + enemies.basic.tickMult * tick) / 10;
     this.type = 'jesus';
   }
 

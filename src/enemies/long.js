@@ -7,7 +7,7 @@ export class LongEnemy extends Enemy {
     super();
     this.health = enemies.long.health + enemies.long.tickMult * tick;
     this.totalHealth = enemies.long.health + enemies.long.tickMult * tick;
-    this.value = this.health / 10;
+    this.value = (enemies.basic.health + enemies.basic.tickMult * tick) / 10;
     this.type = 'long';
   }
 

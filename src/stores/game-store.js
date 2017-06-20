@@ -3,8 +3,8 @@ import { worlds } from '../constants';
 
 export class GameStore {
   // Minimum required state for the game
-  @observable level = 1;
-  @observable world = 1;
+  @observable level = 2;
+  @observable world = 2;
   @observable gameState = 'running';
   @observable selectedTower = 'cross';
   @observable tickSpeed = 500;

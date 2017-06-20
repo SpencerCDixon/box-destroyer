@@ -477,3 +477,16 @@ export const levelEight = {
     'surround',
   ],
 };
+
+export default {
+  levels: [
+    levelOne,
+    levelTwo,
+    levelThree,
+    levelFour,
+    levelFive,
+    levelSix,
+    levelSeven,
+    levelEight,
+  ]
+}
