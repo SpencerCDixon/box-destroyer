@@ -208,8 +208,8 @@ describe('game integretion tests', function() {
   });
 
   describe('unique enemy types', function() {
-    describe('cross/surround enemies', function() {
-      it('cant be damaged by cross/surround towers', function() {
+    describe('cross/surround (JESUS) enemies', function() {
+      it('can only be damaged by cross towers', function() {
         const blueprint = [
           [1, 10, 'X', 'X', 'X'],
           [2, 9, 8, 'X', 'X',],
@@ -222,6 +222,24 @@ describe('game integretion tests', function() {
         const game = new Game(level, onWin, onLose);
 
         fastForward(game, 8);
+
+        expect(onWin).toBeCalled();
+        expect(onLose).not.toBeCalled();
+      });
+
+      it('can only be damaged by surround towers', function() {
+        const blueprint = [
+          [1, 'horizontal', 'X', 'X', 'X'],
+          [2, 'horizontal', 'X', 'X', 'X',],
+          [3, 'surround', 7, 8, 9],
+          [4, 5, 6, 'X', 'X'],
+        ];
+        const enemies = { 1: 'jesus' };
+        const level = generateLevel(blueprint, enemies);
+        const [onWin, onLose] = [jest.fn(), jest.fn()];
+        const game = new Game(level, onWin, onLose);
+
+        fastForward(game, 4);
 
         expect(onWin).toBeCalled();
         expect(onLose).not.toBeCalled();

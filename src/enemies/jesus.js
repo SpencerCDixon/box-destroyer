@@ -12,8 +12,6 @@ export class JesusEnemy extends Enemy {
   }
 
   attack(dmg, towerType) {
-    console.log(dmg);
-    console.log(towerType);
     if (isCrossable(towerType)) {
       this.health = this.health - dmg;
     }
