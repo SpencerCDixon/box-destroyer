@@ -5,6 +5,7 @@ import { observer } from 'mobx-react';
 import { gameStates } from '../constants.js';
 
 import Button from './Button.js';
+import Text from './Text.js';
 
 const Wrapper = styled.div`
   padding: 15px;
@@ -13,6 +14,7 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
 `
+
 
 @observer(['game'])
 class GameControls extends Component {
@@ -24,14 +26,25 @@ class GameControls extends Component {
     this.props.game.setState(gameStates.lost);
   }
 
+  giveHint = () => {
+    alert('venmo spencer $5 ;)');
+  }
+
   render() {
     return (
       <Wrapper>
-        <Button onClick={this.reset} mr={3}>
+        <Button onClick={this.reset} mx={2}>
           Give Up
         </Button>
 
+        <Button onClick={this.giveHint} mx={2}>
+          Hint
+        </Button>
+
+        <Text mx={2}> Enemy Speed </Text>
+
         <Slider 
+          style={{maxWidth: 300}}
           min={1} 
           max={100} 
           defaultValue={this.props.game.tickSpeed / 10} 

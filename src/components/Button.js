@@ -12,6 +12,7 @@ export default reflex(styled.button`
 
   background-color: #55acee;
   box-shadow: 0px 5px 0px 0px #3C93D5;
+  white-space: nowrap;
 
   &:active {
     transform: translate(0px, 5px);

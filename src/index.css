@@ -39,3 +39,13 @@ button::-moz-focus-inner {
   width: 500px;
   display: flex;
 }
+
+/* React slider overrides */
+.rc-slider-handle {
+  background-color: #55acee !important;
+  border: 2px solid #55acee !important;
+}
+
+.rc-slider-track {
+  background-color: #55acee !important;
+}
