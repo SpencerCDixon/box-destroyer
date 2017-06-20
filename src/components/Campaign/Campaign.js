@@ -8,7 +8,6 @@ import Level from '../Level.js';
 import SelectedTower from '../SelectedTower.js';
 import Shop from '../Shop.js';
 import CampaignProgress from '../CampaignProgress.js';
-import Button from '../Button.js';
 import GameControls from '../GameControls.js';
 import GameDevTools from '../GameDevTools.js';
 

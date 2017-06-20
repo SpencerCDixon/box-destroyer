@@ -20,7 +20,7 @@ export class ColumnTower extends Tower {
   }
 
   range(board) {
-    const [row, col] = this.tile.loc;
+    const [_, col] = this.tile.loc;
     const length = board.tiles.length
     const wholeRow = range(length);
     return wholeRow.map(newRow => [newRow, col]);

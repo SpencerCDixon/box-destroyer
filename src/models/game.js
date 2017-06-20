@@ -1,6 +1,5 @@
 import { Board } from './board';
 import { toNumber, has } from 'lodash';
-import { gameStates } from '../constants.js';
 
 export class Game {
   constructor(level, onWin, onLose) {

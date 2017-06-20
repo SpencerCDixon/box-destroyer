@@ -1,11 +1,5 @@
 import { 
-  BasicSpawn, BasicEnemy, 
-  OffLimits, Path, Placeable,
-  SimpleTower,
-  CrossTower,
-  VerticalTower,
-  HorizontalTower,
-  SurroundTower,
+  BasicSpawn, OffLimits, Path, Placeable,
 } from '../tiles';
 import { Tower } from '../towers/tower';
 import { towers, towerTypes } from '../constants.js';

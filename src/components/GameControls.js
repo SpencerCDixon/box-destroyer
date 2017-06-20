@@ -18,6 +18,10 @@ const Wrapper = styled.div`
 
 @observer(['game'])
 class GameControls extends Component {
+  static propTypes = {
+    game: PropTypes.object.isRequired,
+  }
+
   speedUp = value => {
     this.props.game.updateTicker(value * 10);
   }

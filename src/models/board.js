@@ -1,5 +1,5 @@
 import { Tile } from './tile';
-import { shopTowerTypes, gameStates, enemyTypes } from '../constants.js';
+import { shopTowerTypes, enemyTypes } from '../constants.js';
 import { isFunction, isString, toNumber } from 'lodash';
 
 const PLACEABLE_TILE = 'P';

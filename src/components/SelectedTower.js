@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import styled from 'styled-components';
 import { inject, observer } from 'mobx-react';
-import { towerTypes, shopTowerTypes, towers } from '../constants';
+import { towerTypes, towers } from '../constants';
 import { flex } from '../styles';
 
 const Container = styled.section`

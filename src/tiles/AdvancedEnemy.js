@@ -1,5 +1,4 @@
 import React from 'react';
-import { Tile } from './Tile';
 
 export function AdvancedEnemy({current, total}) {
   const sx = {

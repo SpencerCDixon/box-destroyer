@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react';
 import styled from 'styled-components'
 import { observer } from 'mobx-react';
 import { Game } from '../models/game.js';
-import { gameStates } from '../constants.js';
 import { isPaused, didWin, didLose } from '../towers/util';
 import { flex } from '../styles';
 import Button from './Button.js';
@@ -101,7 +100,7 @@ class Level extends Component {
       }
     }, speed) // Allow levels to have their own interval for sending enemies out.
 
-    this.props.onReset();
+    onReset();
   }
 
   render() {

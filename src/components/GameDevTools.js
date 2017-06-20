@@ -1,10 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import styled from 'styled-components'
-import Slider from 'rc-slider';
 import { observer } from 'mobx-react';
-import { gameStates } from '../constants.js';
 
-import Button from './Button.js';
+// import { gameStates } from '../constants.js';
+// import Button from './Button.js';
 
 const Wrapper = styled.div`
   position: absolute;
@@ -21,6 +20,10 @@ const Info = styled.p`
 
 @observer(['game'])
 class GameDevTools extends Component {
+  static propTypes = {
+    game: PropTypes.object.isRequired,
+  }
+
   render() {
     const { game } = this.props;
 
