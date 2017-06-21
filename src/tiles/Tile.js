@@ -1,19 +1,30 @@
-import styled from 'styled-components';
+import React, { Component, PropTypes } from 'react';
+import { inject, observer } from 'mobx-react';
 
-// const sx = {
-  // width: '10%',
-  // height: 'calc(80vh / 10)',
-  // background: 'rgba(0,0,0,0.4)',
-// };
+@inject(stores => ({
+  length: stores.game.tileLength,
+}))
+@observer(['game'])
+class Tile extends Component {
+  static propTypes = {
+    length: PropTypes.number.isRequired,
+  }
 
-// export function Tile({style, ...props}) {
-  // return (
-    // <div style={{...sx, ...style}} {...props} />
-  // );
-// }
+  render() {
+    const { style, children, length, ...rest } = this.props;
+    const sx = {
+      width: length,
+      height: length,
+      background: 'white',
+      ...style,
+    };
 
-export const Tile = styled.div`
-  width: 50px;
-  height: 50px;
-  background: white;
-`;
+    return (
+      <div style={sx} {...rest}>
+        {children}
+      </div>
+    );
+  }
+}
+
+export default Tile;

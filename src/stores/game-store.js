@@ -1,6 +1,10 @@
 import { computed, action, observable } from 'mobx';
 import { worlds } from '../constants';
 
+function roundDownToMultiple(number, multiple) {
+    return number - (number % multiple);
+}   
+
 export class GameStore {
   // Minimum required state for the game
   @observable level = 1;
@@ -9,6 +13,7 @@ export class GameStore {
   @observable selectedTower = 'cross';
   @observable tickSpeed = 500;
   @observable boardDimensions = 0;
+  @observable tileLength = 0;
 
   // Actions that can change the state
   @action nextLevel = () => {
@@ -28,6 +33,11 @@ export class GameStore {
   @action updateTicker = newSpeed => {
     this.tickSpeed = newSpeed;
     console.log({tickSpeed: this.tickSpeed});
+  }
+
+  @action setBoardDimensions = length => {
+    this.boardDimensions = roundDownToMultiple(length, 10);
+    this.tileLength = roundDownToMultiple(length, 10) / 10;
   }
 
   // Computed Values

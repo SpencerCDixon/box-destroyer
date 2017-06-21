@@ -33,7 +33,6 @@ button::-moz-focus-inner {
 }
 
 .row {
-  width: 500px;
   display: flex;
 }
 

@@ -46,6 +46,7 @@ const Header = styled.h1`
   gameState: stores.game.gameState,
   currentLevel: stores.game.currentLevel,
   selectedTower: stores.game.selectedTower,
+  length: stores.game.boardDimensions,
 }))
 @observer(['game'])
 class Level extends Component {
@@ -62,10 +63,11 @@ class Level extends Component {
     speed: PropTypes.number.isRequired,
     gameState: PropTypes.string.isRequired,
     currentLevel: PropTypes.object.isRequired,
+    length: PropTypes.number.isRequired,
   }
 
   componentDidMount() {
-    const { gameState, currentLevel, speed, onWin, onLose } = this.props;
+    const { currentLevel, speed, onWin, onLose } = this.props;
 
     this.internalGame = new Game(currentLevel, onWin, onLose);
     this.loop = setInterval(() => {
@@ -90,7 +92,6 @@ class Level extends Component {
   }
 
   speedUp = (newSpeed) => {
-    const { gameState } = this.props;
     clearInterval(this.loop);
     this.loop = setInterval(() => {
       if (this.isRunning()) {
@@ -120,56 +121,52 @@ class Level extends Component {
   }
 
   render() {
-    const { gameState } = this.props;
+    const { length, gameState } = this.props;
 
     if (!this.state.internalGame) {
       return null;
     }
 
     return (
-      <HeightToBottom>
-        {(height) => (
-          <div style={{display: 'flex', justifyContent: 'center'}}>
-          <div style={{height: height, width: height, position: 'relative'}} className="game">
-            {didLose(gameState) && (
-              <Overlay>
-                <Header>You lose... fucking idiot.</Header>
-                <Header large>😂</Header>
-                <Button onClick={this.reset}>
-                  Try Again
-                </Button>
-              </Overlay>
-            )}
-            {didWin(gameState) && (
-              <Overlay>
-                <Header>Nice job human.</Header>
-                <Header large>😖</Header>
-                <Button onClick={this.reset}>Next Level</Button>
-              </Overlay>
-            )}
-            {isPaused(gameState) && (
-              <Overlay>
-                <Header>Paused</Header>
-                <Header large>⏸</Header>
-              </Overlay>
-            )}
+      <div style={{display: 'flex', justifyContent: 'center'}}>
+        <div style={{height: length, width: length, position: 'relative'}} className="game">
+          {didLose(gameState) && (
+            <Overlay>
+              <Header>You lose... fucking idiot.</Header>
+              <Header large>😂</Header>
+              <Button onClick={this.reset}>
+                Try Again
+              </Button>
+            </Overlay>
+          )}
+          {didWin(gameState) && (
+            <Overlay>
+              <Header>Nice job human.</Header>
+              <Header large>😖</Header>
+              <Button onClick={this.reset}>Next Level</Button>
+            </Overlay>
+          )}
+          {isPaused(gameState) && (
+            <Overlay>
+              <Header>Paused</Header>
+              <Header large>⏸</Header>
+            </Overlay>
+          )}
 
-            <CurrentTurn>⏱ {this.state.internalGame.tick}</CurrentTurn>
-            <Gold>💰 {this.state.internalGame.gold}</Gold>
+          <CurrentTurn>⏱ {this.state.internalGame.tick}</CurrentTurn>
+          <Gold>💰 {this.state.internalGame.gold}</Gold>
 
-            {this.state.internalGame.board.tiles.map((row, i) => {
-              return (
-                <div className="row" key={`row-${i}`}>
-                  {row.map((tile, i) => {
-                    return tile.render(this.addTower.bind(this, tile))
-                  })}
-                </div>
-              )
-            })}
-          </div>
-          </div>
-        )}
-      </HeightToBottom>
+          {this.state.internalGame.board.tiles.map((row, i) => {
+            return (
+              <div className="row" key={`row-${i}`}>
+                {row.map((tile, i) => {
+                  return tile.render(this.addTower.bind(this, tile))
+                })}
+              </div>
+            )
+          })}
+        </div>
+      </div>
     );
   }
 }

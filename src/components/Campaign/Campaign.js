@@ -10,6 +10,7 @@ import Shop from '../Shop.js';
 import CampaignProgress from '../CampaignProgress.js';
 import GameControls from '../GameControls.js';
 import GameDevTools from '../GameDevTools.js';
+import ResponsiveLevelContainer from '../ResponsiveLevelContainer.js';
 
 // Campaign Styling
 import { 
@@ -78,12 +79,13 @@ class Campaign extends Component {
           <GameControls />
           <CampaignProgress />
 
-          <Level
-            onWin={this.handleWin}
-            onLose={this.handleLose}
-            onReset={this.handleReset}
-            speed={this.props.game.tickSpeed}
-          />
+          <ResponsiveLevelContainer>
+            <Level
+              onWin={this.handleWin}
+              onLose={this.handleLose}
+              onReset={this.handleReset}
+            />
+          </ResponsiveLevelContainer>
         </PlayingField>
 
         <GameDevTools />

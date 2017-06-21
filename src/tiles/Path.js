@@ -1,5 +1,5 @@
 import React from 'react';
-import { Tile } from './Tile';
+import Tile from './Tile';
 import { BasicEnemy } from './BasicEnemy';
 import { AdvancedEnemy } from './AdvancedEnemy';
 import { JesusEnemy } from './JesusEnemy';
