@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import { Provider } from 'mobx-react';
 import store from './stores';
-import Campaign from './components/Campaign';
+import { MobxRouter, startRouter } from 'mobx-router';
+import routes from './routes.js';
+
+startRouter(routes, store);
 
 class App extends Component {
   render() {
     return (
-      <Provider game={store.game}>
-        <Campaign />
+      <Provider store={store} game={store.game}>
+        <MobxRouter />
       </Provider>
     );
   }
