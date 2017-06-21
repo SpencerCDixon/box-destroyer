@@ -8,25 +8,25 @@ describe('Enemies', function() {
 
     it('takes damage from cross towers', function() {
       const enemy = new JesusEnemy(1);
-      expect(enemy.health).toEqual(95);
+      expect(enemy.health).toEqual(53);
       enemy.attack(30, 'cross');
-      expect(enemy.health).toEqual(65);
+      expect(enemy.health).toEqual(23);
     });
 
     it('takes damage from surround towers', function() {
       const enemy = new JesusEnemy(1);
-      expect(enemy.health).toEqual(95);
+      expect(enemy.health).toEqual(53);
       enemy.attack(30, 'surround');
-      expect(enemy.health).toEqual(65);
+      expect(enemy.health).toEqual(23);
     });
 
     it('doesnt take damage from other towers', function() {
       const enemy = new JesusEnemy(1);
-      expect(enemy.health).toEqual(95);
+      expect(enemy.health).toEqual(53);
       nonJesus.forEach(type => {
         enemy.attack(30, type);
       });
-      expect(enemy.health).toEqual(95);
+      expect(enemy.health).toEqual(53);
     });
   });
 
@@ -35,25 +35,25 @@ describe('Enemies', function() {
 
     it('takes damage from horizontal towers', function() {
       const enemy = new LongEnemy(1);
-      expect(enemy.health).toEqual(95);
+      expect(enemy.health).toEqual(53);
       enemy.attack(40, 'horizontal');
-      expect(enemy.health).toEqual(55);
+      expect(enemy.health).toEqual(13);
     });
 
     it('takes damage from array towers', function() {
       const enemy = new LongEnemy(1);
-      expect(enemy.health).toEqual(95);
+      expect(enemy.health).toEqual(53);
       enemy.attack(40, 'array');
-      expect(enemy.health).toEqual(55);
+      expect(enemy.health).toEqual(13);
     });
 
     it('doesnt take damage from other towers', function() {
       const enemy = new LongEnemy(1);
-      expect(enemy.health).toEqual(95);
+      expect(enemy.health).toEqual(53);
       nonLong.forEach(type => {
         enemy.attack(30, type);
       });
-      expect(enemy.health).toEqual(95);
+      expect(enemy.health).toEqual(53);
     });
   });
 
@@ -62,25 +62,25 @@ describe('Enemies', function() {
 
     it('takes damage from column towers', function() {
       const enemy = new TallEnemy(1);
-      expect(enemy.health).toEqual(95);
+      expect(enemy.health).toEqual(53);
       enemy.attack(40, 'column');
-      expect(enemy.health).toEqual(55);
+      expect(enemy.health).toEqual(13);
     });
 
     it('takes damage from vertical towers', function() {
       const enemy = new TallEnemy(1);
-      expect(enemy.health).toEqual(95);
+      expect(enemy.health).toEqual(53);
       enemy.attack(40, 'vertical');
-      expect(enemy.health).toEqual(55);
+      expect(enemy.health).toEqual(13);
     });
 
     it('doesnt take damage from other towers', function() {
       const enemy = new TallEnemy(1);
-      expect(enemy.health).toEqual(95);
+      expect(enemy.health).toEqual(53);
       nonTall.forEach(type => {
         enemy.attack(30, type);
       });
-      expect(enemy.health).toEqual(95);
+      expect(enemy.health).toEqual(53);
     });
   });
 });
