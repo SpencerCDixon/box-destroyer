@@ -15,5 +15,5 @@ import styled from 'styled-components';
 export const Tile = styled.div`
   width: 50px;
   height: 50px;
-  background: rgba(0,0,0,0.4);
+  background: white;
 `;

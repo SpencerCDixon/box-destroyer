@@ -3,11 +3,12 @@ import { worlds } from '../constants';
 
 export class GameStore {
   // Minimum required state for the game
-  @observable level = 2;
-  @observable world = 2;
+  @observable level = 1;
+  @observable world = 1;
   @observable gameState = 'running';
   @observable selectedTower = 'cross';
   @observable tickSpeed = 500;
+  @observable boardDimensions = 0;
 
   // Actions that can change the state
   @action nextLevel = () => {

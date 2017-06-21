@@ -1,10 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import styled from 'styled-components'
-import { observer } from 'mobx-react';
+import { inject, observer } from 'mobx-react';
 import { Game } from '../models/game.js';
 import { isPaused, didWin, didLose } from '../towers/util';
 import { flex } from '../styles';
 import Button from './Button.js';
+import HeightToBottom from './HeightToBottom.js';
 
 const Gold = styled.div`
   color: goldenrod;
@@ -40,10 +41,18 @@ const Header = styled.h1`
   font-size: ${props => props.large ? '5em' : '2em'};
 `
 
+@inject(stores => ({
+  speed: stores.game.tickSpeed,
+  gameState: stores.game.gameState,
+  currentLevel: stores.game.currentLevel,
+  selectedTower: stores.game.selectedTower,
+}))
 @observer(['game'])
 class Level extends Component {
   state = { 
     internalGame: undefined,
+    height: -1,
+    width: -1,
   }
 
   static propTypes = {
@@ -51,13 +60,16 @@ class Level extends Component {
     onLose: PropTypes.func.isRequired, 
     onReset: PropTypes.func.isRequired,
     speed: PropTypes.number.isRequired,
+    gameState: PropTypes.string.isRequired,
+    currentLevel: PropTypes.object.isRequired,
   }
 
   componentDidMount() {
-    const { speed, game, onWin, onLose } = this.props;
-    this.internalGame = new Game(game.currentLevel, onWin, onLose);
+    const { gameState, currentLevel, speed, onWin, onLose } = this.props;
+
+    this.internalGame = new Game(currentLevel, onWin, onLose);
     this.loop = setInterval(() => {
-      if (game.gameState === 'running') {
+      if (this.isRunning()) {
         this.setState({internalGame: this.internalGame.nextTick()});
       }
     }, speed) // Allow levels to have their own interval for sending enemies out.
@@ -73,11 +85,15 @@ class Level extends Component {
     clearInterval(this.loop);
   }
 
+  isRunning = () => {
+    return this.props.gameState === 'running';
+  }
+
   speedUp = (newSpeed) => {
-    const { game } = this.props;
+    const { gameState } = this.props;
     clearInterval(this.loop);
     this.loop = setInterval(() => {
-      if (game.gameState === 'running') {
+      if (this.isRunning()) {
         this.setState({internalGame: this.internalGame.nextTick()});
       }
     }, newSpeed);
@@ -90,12 +106,12 @@ class Level extends Component {
 
   reset = () => {
     clearInterval(this.loop);
-    const { speed, game, onWin, onLose, onReset } = this.props;
+    const { speed, currentLevel, onWin, onLose, onReset } = this.props;
     // rebuild game, set it as current level, start loop back up.
-    this.internalGame = new Game(game.currentLevel, onWin, onLose);
+    this.internalGame = new Game(currentLevel, onWin, onLose);
     this.setState({game: this.internalGame});
     this.loop = setInterval(() => {
-      if (game.gameState === 'running') {
+      if (this.isRunning()) {
         this.setState({internalGame: this.internalGame.nextTick()});
       }
     }, speed) // Allow levels to have their own interval for sending enemies out.
@@ -104,50 +120,56 @@ class Level extends Component {
   }
 
   render() {
-    const { game } = this.props;
-    
+    const { gameState } = this.props;
+
     if (!this.state.internalGame) {
       return null;
     }
 
     return (
-      <div className="game">
-        {didLose(game.gameState) && (
-          <Overlay>
-            <Header>You lose... fucking idiot.</Header>
-            <Header large>😂</Header>
-            <Button onClick={this.reset}>
-              Try Again
-            </Button>
-          </Overlay>
-        )}
-        {didWin(game.gameState) && (
-          <Overlay>
-            <Header>Nice job human.</Header>
-            <Header large>😖</Header>
-            <Button onClick={this.reset}>Next Level</Button>
-          </Overlay>
-        )}
-        {isPaused(game.gameState) && (
-          <Overlay>
-            <Header>Paused</Header>
-            <Header large>⏸</Header>
-          </Overlay>
-        )}
+      <HeightToBottom>
+        {(height) => (
+          <div style={{display: 'flex', justifyContent: 'center'}}>
+          <div style={{height: height, width: height, position: 'relative'}} className="game">
+            {didLose(gameState) && (
+              <Overlay>
+                <Header>You lose... fucking idiot.</Header>
+                <Header large>😂</Header>
+                <Button onClick={this.reset}>
+                  Try Again
+                </Button>
+              </Overlay>
+            )}
+            {didWin(gameState) && (
+              <Overlay>
+                <Header>Nice job human.</Header>
+                <Header large>😖</Header>
+                <Button onClick={this.reset}>Next Level</Button>
+              </Overlay>
+            )}
+            {isPaused(gameState) && (
+              <Overlay>
+                <Header>Paused</Header>
+                <Header large>⏸</Header>
+              </Overlay>
+            )}
 
-        <CurrentTurn>⏱ {this.state.internalGame.tick}</CurrentTurn>
-        <Gold>💰 {this.state.internalGame.gold}</Gold>
+            <CurrentTurn>⏱ {this.state.internalGame.tick}</CurrentTurn>
+            <Gold>💰 {this.state.internalGame.gold}</Gold>
 
-        {this.state.internalGame.board.tiles.map((row, i) => {
-          return (
-            <div className="row" key={`row-${i}`}>
-              {row.map((tile, i) => {
-                return tile.render(this.addTower.bind(this, tile))
-              })}
-            </div>
-          )
-        })}
-      </div>
+            {this.state.internalGame.board.tiles.map((row, i) => {
+              return (
+                <div className="row" key={`row-${i}`}>
+                  {row.map((tile, i) => {
+                    return tile.render(this.addTower.bind(this, tile))
+                  })}
+                </div>
+              )
+            })}
+          </div>
+          </div>
+        )}
+      </HeightToBottom>
     );
   }
 }

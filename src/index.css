@@ -28,9 +28,6 @@ button::-moz-focus-inner {
 }
 
 .game {
-  position: relative;
-  width: 500px;
-  height: 500px;
   display: flex;
   flex-direction: column;
 }
@@ -56,10 +53,10 @@ button::-moz-focus-inner {
     url(./images/hip-square.png) !important;
 }
 
-.grass {
-  background-image: url(./images/grass-3.png) !important;
-}
+/* .grass { */
+  /* background-image: url(./images/grass-3.png) !important; */
+/* } */
 
-.water {
-  background-image: url(./images/water-3.png) !important;
-}
+/* .water { */
+  /* background-image: url(./images/water-3.png) !important; */
+/* } */

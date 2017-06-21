@@ -13,13 +13,10 @@ import GameDevTools from '../GameDevTools.js';
 
 // Campaign Styling
 import { 
-  Wrapper,
-  Sidebar,
   ShopContainer,
   PlayingField,
   FlexColumn,
   LevelContainer,
-  Row,
 } from './styles';
 
 
@@ -72,36 +69,25 @@ class Campaign extends Component {
 
   render() {
     return (
-      <Wrapper>
-        <FlexColumn>
-          <ShopContainer>
-            <Shop />
-          </ShopContainer>
+      <FlexColumn>
+        <ShopContainer>
+          <Shop />
+        </ShopContainer>
 
-          <PlayingField>
-            <GameControls />
+        <PlayingField>
+          <GameControls />
+          <CampaignProgress />
 
-            <Row>
-              <Sidebar>
-                <SelectedTower />
-              </Sidebar>
-
-              <LevelContainer>
-                <Level
-                  onWin={this.handleWin}
-                  onLose={this.handleLose}
-                  onReset={this.handleReset}
-                  speed={this.props.game.tickSpeed}
-                />
-              </LevelContainer>
-            </Row>
-
-            <CampaignProgress />
-          </PlayingField>
-        </FlexColumn>
+          <Level
+            onWin={this.handleWin}
+            onLose={this.handleLose}
+            onReset={this.handleReset}
+            speed={this.props.game.tickSpeed}
+          />
+        </PlayingField>
 
         <GameDevTools />
-      </Wrapper>
+      </FlexColumn>
     );
   }
 }
