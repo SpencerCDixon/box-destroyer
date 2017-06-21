@@ -58,9 +58,10 @@ export default class Shop extends Component {
               {tower.render()}
               <Price>💰 {towers[type].price}</Price>
 
+              {/*
               <Button onClick={onSelect.bind(this, type)}>
                 Select
-              </Button>
+              </Button>*/}
             </TowerContainer>
           )
         })}

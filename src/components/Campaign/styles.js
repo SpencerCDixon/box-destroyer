@@ -2,13 +2,13 @@ import styled from 'styled-components';
 
 export const ShopContainer = styled.section`
   width: 100%;
-  height: 20vh;
+  height: 15vh;
   background: #222831;
 `
 
 export const PlayingField = styled.section`
   width: 100%;
-  height: 80vh;
+  height: 85vh;
   display: flex;
   flex-direction: column
 `

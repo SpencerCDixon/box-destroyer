@@ -15,7 +15,6 @@ const Wrapper = styled.div`
   align-items: center;
 `
 
-
 @observer(['game'])
 class GameControls extends Component {
   static propTypes = {

@@ -13,11 +13,19 @@ class ResponsiveLevelContainer extends Component {
   state = { offset: 0 }
 
   componentDidMount() {
-    this.bodyHeight = document.body.getBoundingClientRect().bottom;
-    this.elHeight = this.container.getBoundingClientRect().top;
-    const heightOffset = this.bodyHeight - this.elHeight;
+    this.setDimensions();
+    window.addEventListener('resize', this.setDimensions)
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.setDimensions)
+  }
+
+  setDimensions = () => {
+    const bodyHeight = document.body.getBoundingClientRect().bottom;
+    const elHeight = this.container.getBoundingClientRect().top;
+    const heightOffset = bodyHeight - elHeight;
     const width = window.innerWidth;
-    console.log({width, heightOffset});
     this.props.setBoardDimensions(Math.min(width, heightOffset));
   }
 

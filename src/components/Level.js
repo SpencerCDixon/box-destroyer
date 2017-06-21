@@ -16,7 +16,7 @@ const Gold = styled.div`
 `;
 
 const CurrentTurn = styled.div`
-  color: white;
+  color: black;
   position: absolute;
   top: 20px;
   right: 20px;
